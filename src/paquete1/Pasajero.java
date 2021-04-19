@@ -7,7 +7,7 @@ public class Pasajero extends Persona {
 	private String pasaporte;
 	private String cumpleaños;
 	//private ArrayList<String> equipaje;
-	private int clase;
+	private String clase;
 	//private String cobro;
 	private int millas;
 	private boolean viajeroFrecuente;
