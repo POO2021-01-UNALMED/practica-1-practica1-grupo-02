@@ -1,21 +1,110 @@
 package paquete1;
+//import java.util.*;
 
 public class Equipaje {
 	private Pasajero pasajero;
+	private String tipo;
 	private int masa;
+	//private ArrayList<String> rayosX = new ArrayList<String>(); 
 	private boolean permitido;
+	
+	// *************************************************************************************************
+	// Constructores
+	// *************************************************************************************************
 	
 	public Equipaje() {
 		this.pasajero = null;
+		this.tipo = " ";
 		this.masa = 0;
 		this.permitido = true;
 	}
 	
-	public Equipaje(Pasajero pasajero, int masa, boolean permitido) {
+	public Equipaje(Pasajero pasajero, String tipo, int masa, boolean permitido) {
 		this.pasajero = pasajero;
+		this.tipo = tipo;
 		this.masa = masa;
 		this.permitido = permitido;
+		this.pasajero.nuevoEquipaje(this);
 	}
 	
+	// *************************************************************************************************
 	// Métodos
+	// *************************************************************************************************
+	
+	public boolean soprepeso() {
+		boolean sobrepeso = false;
+		if(this.tipo.equals("Mano")) {
+			if (this.pasajero.getClase().equals("Primera Clase")) {
+				if (this.masa > 12) {
+					sobrepeso = true;
+				}
+				else {
+					sobrepeso = false;
+				}
+			}
+			else {
+				if (this.masa > 10) {
+					sobrepeso = true;
+				}
+				else {
+					sobrepeso = false;
+				}
+			}
+		}
+		else if (this.tipo.equals("Bodega")) {
+			if (this.pasajero.getClase().equals("Primera Clase")) {
+				if (this.masa > 25) {
+					sobrepeso = true;
+				}
+				else {
+					sobrepeso = false;
+				}
+			}
+			else {
+				if (this.masa > 20) {
+					sobrepeso = true;
+				}
+				else {
+					sobrepeso = false;
+				}
+			}
+		}
+		return sobrepeso;
+	}
+	
+	
+	//public boolean checkRayosX() 
+	
+	// *************************************************************************************************
+	// Getters and Setters
+	// *************************************************************************************************
+
+	public Pasajero getPasajero() {
+		return pasajero;
+	}
+	public void setPasajero(Pasajero pasajero) {
+		this.pasajero = pasajero;
+	}
+
+	public int getMasa() {
+		return masa;
+	}
+	public void setMasa(int masa) {
+		this.masa = masa;
+	}
+
+	public boolean isPermitido() {
+		return permitido;
+	}
+	public void setPermitido(boolean permitido) {
+		this.permitido = permitido;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
 }

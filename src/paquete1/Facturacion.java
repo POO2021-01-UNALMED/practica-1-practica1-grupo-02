@@ -9,6 +9,10 @@ public class Facturacion {
 	private Vuelo vuelo;
 	private Equipaje equipaje;
 	
+	// *************************************************************************************************
+	// Constructores
+	// *************************************************************************************************
+	
 	public Facturacion() {
 		this(0, null, null, null);
 		this.descuento = 0;
@@ -24,5 +28,78 @@ public class Facturacion {
 		//this.total = this.calcularCostos();
 	}
 	
+	// *************************************************************************************************
 	// Métodos
+	// *************************************************************************************************
+	
+	public int multaEquipaje() {
+		int i = 0;
+		int multa;
+		while (i < this.pasajero.getEquipaje().size()) {
+			if (this.pasajero.getEquipaje().get(i).soprepeso() == true) {
+				this.pasajero.getEquipaje().get(i)
+			}
+			else {
+				multa = 0;
+			}
+			i ++;
+		}
+	}
+	// multaCancelacion()
+	// descuento()
+	// calcularCostos()
+	// toString()
+	
+	// *************************************************************************************************
+	// Getters and Setters
+	// *************************************************************************************************
+	
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+	public float getDescuento() {
+		return descuento;
+	}
+
+	public void setDescuento(float descuento) {
+		this.descuento = descuento;
+	}
+
+	public int getCostoInicial() {
+		return costoInicial;
+	}
+
+	public void setCostoInicial(int costoInicial) {
+		this.costoInicial = costoInicial;
+	}
+
+	public Pasajero getPasajero() {
+		return pasajero;
+	}
+
+	public void setPasajero(Pasajero pasajero) {
+		this.pasajero = pasajero;
+	}
+
+	public Vuelo getVuelo() {
+		return vuelo;
+	}
+
+	public void setVuelo(Vuelo vuelo) {
+		this.vuelo = vuelo;
+	}
+
+	public Equipaje getEquipaje() {
+		return equipaje;
+	}
+
+	public void setEquipaje(Equipaje equipaje) {
+		this.equipaje = equipaje;
+	}
+	
 }
