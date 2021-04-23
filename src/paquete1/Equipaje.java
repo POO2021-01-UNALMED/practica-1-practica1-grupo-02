@@ -16,15 +16,17 @@ public class Equipaje {
 		this.pasajero = null;
 		this.tipo = " ";
 		this.masa = 0;
-		this.permitido = true;
+		this.permitido = false;
 	}
 	
-	public Equipaje(Pasajero pasajero, String tipo, int masa, boolean permitido) {
+	public Equipaje(Pasajero pasajero, String tipo, int masa) {
 		this.pasajero = pasajero;
 		this.tipo = tipo;
 		this.masa = masa;
-		this.permitido = permitido;
-		this.pasajero.nuevoEquipaje(this);
+		this.permitido = this.checkear();
+		if (this.permitido) {
+			this.pasajero.nuevoEquipaje(this);
+		}
 	}
 	
 	// *************************************************************************************************
@@ -33,47 +35,69 @@ public class Equipaje {
 	
 	public boolean soprepeso() {
 		boolean sobrepeso = false;
-		if(this.tipo.equals("Mano")) {
-			if (this.pasajero.getClase().equals("Primera Clase")) {
-				if (this.masa > 12) {
-					sobrepeso = true;
+		if (this.permitido == true) {
+			if(this.tipo.equals("Mano")) {
+				if (this.pasajero.getClase().equals("Primera Clase")) {
+					if (this.masa > 12) {
+						sobrepeso = true;
+					}
+					else {
+						sobrepeso = false;
+					}
 				}
 				else {
-					sobrepeso = false;
+					if (this.masa > 10) {
+						sobrepeso = true;
+					}
+					else {
+						sobrepeso = false;
+					}
 				}
 			}
-			else {
-				if (this.masa > 10) {
-					sobrepeso = true;
+			else if (this.tipo.equals("Bodega")) {
+				if (this.pasajero.getClase().equals("Primera Clase")) {
+					if (this.masa > 25) {
+						sobrepeso = true;
+					}
+					else {
+						sobrepeso = false;
+					}
 				}
 				else {
-					sobrepeso = false;
-				}
-			}
-		}
-		else if (this.tipo.equals("Bodega")) {
-			if (this.pasajero.getClase().equals("Primera Clase")) {
-				if (this.masa > 25) {
-					sobrepeso = true;
-				}
-				else {
-					sobrepeso = false;
-				}
-			}
-			else {
-				if (this.masa > 20) {
-					sobrepeso = true;
-				}
-				else {
-					sobrepeso = false;
+					if (this.masa > 20) {
+						sobrepeso = true;
+					}
+					else {
+						sobrepeso = false;
+					}
 				}
 			}
 		}
 		return sobrepeso;
 	}
 	
+	public boolean checkear() {
+		boolean ok = false;
+		if (this.tipo.equals("Mano") || this.tipo.equals("Bodega")) {
+			ok = true;
+		}
+		else {
+			ok = false;
+			System.out.println("El equipaje solo puede ser de tipo Bodega o de tipo Mano");
+		}
+		return ok;
+	}
 	
-	//public boolean checkRayosX() 
+	public String toString() {
+		if (this.permitido) {
+			return "Equipaje de "+this.getTipo()+" perteneciente a "+this.getPasajero().getNombre()+"\n"+
+					"Peso: "+this.getMasa()+"\n"+"El equipaje ha sido permitido";
+		}
+		else {
+			return "Equipaje de "+this.getTipo()+" perteneciente a "+this.getPasajero().getNombre()+"\n"+
+					"Peso: "+this.getMasa()+"\n"+"El equipaje ha sido denegado";
+		}
+	}
 	
 	// *************************************************************************************************
 	// Getters and Setters

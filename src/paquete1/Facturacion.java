@@ -3,7 +3,7 @@ import gestion.*;
 
 public class Facturacion {
 	private int total = 0;
-	private float descuento = 0;
+	private int descuento = 0;
 	private int costoInicial;
 	private Pasajero pasajero;
 	private Vuelo vuelo;
@@ -34,16 +34,36 @@ public class Facturacion {
 	
 	public int multaEquipaje() {
 		int i = 0;
-		int multa;
+		int multa = 0;
 		while (i < this.pasajero.getEquipaje().size()) {
 			if (this.pasajero.getEquipaje().get(i).soprepeso() == true) {
-				this.pasajero.getEquipaje().get(i)
+				if (this.pasajero.getEquipaje().get(i).getTipo().equals("Mano")) {
+					if (this.pasajero.getClase().equals("Primera Clase")) {
+						int tope = this.pasajero.getEquipaje().get(i).getMasa() - 12;
+						multa = tope * 15;
+					}
+					else {
+						int tope = this.pasajero.getEquipaje().get(i).getMasa() - 10;
+						multa = tope * 12;
+					}
+				}
+				else if (this.pasajero.getEquipaje().get(i).getTipo().equals("Bodega")) {
+					if (this.pasajero.getClase().equals("Primera Clase")) {
+						int tope = this.pasajero.getEquipaje().get(i).getMasa() - 25;
+						multa = tope * 20;
+					}
+					else {
+						int tope = this.pasajero.getEquipaje().get(i).getMasa() - 20;
+						multa = tope * 18;
+					}
+				}
 			}
 			else {
 				multa = 0;
 			}
 			i ++;
 		}
+		return multa;
 	}
 	// multaCancelacion()
 	// descuento()
@@ -62,11 +82,11 @@ public class Facturacion {
 		this.total = total;
 	}
 
-	public float getDescuento() {
+	public int getDescuento() {
 		return descuento;
 	}
 
-	public void setDescuento(float descuento) {
+	public void setDescuento(int descuento) {
 		this.descuento = descuento;
 	}
 
