@@ -28,4 +28,32 @@ public class Pasajero extends Persona {
 		return equipaje;
 	}
 
+	public String getPasaporte() {
+		return pasaporte;
+	}
+	public void setPasaporte(String pasaporte) {
+		this.pasaporte = pasaporte;
+	}
+	
+	public String getCumpleaños() {
+		return cumpleaños;
+	}
+	public void setCumpleaños(String cumpleaños) {
+		this.cumpleaños = cumpleaños;
+	}
+	
+	public int getMillas() {
+		return millas;
+	}
+	public void setMillas(int millas) {
+		this.millas = millas;
+	}
+	
+	public boolean isViajeroFrecuente() {
+		return viajeroFrecuente;
+	}
+	public void setViajeroFrecuente(boolean viajeroFrecuente) {
+		this.viajeroFrecuente = viajeroFrecuente;
+	}
+		
 }

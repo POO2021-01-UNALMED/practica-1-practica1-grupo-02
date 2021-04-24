@@ -2,9 +2,9 @@ package paquete1;
 import gestion.*;
 
 public class Facturacion {
-	private int total = 0;
-	private int descuento = 0;
-	private int costoInicial;
+	private double total = 0;
+	private double descuento = 0;
+	private double costoInicial = 0;
 	private Pasajero pasajero;
 	private Vuelo vuelo;
 	private Equipaje equipaje;
@@ -14,17 +14,18 @@ public class Facturacion {
 	// *************************************************************************************************
 	
 	public Facturacion() {
-		this(0, null, null, null);
+		this(null, null, null);
 		this.descuento = 0;
 		this.total = 0;
+		this.costoInicial = 0;
 	}
 	
-	public Facturacion(int costoInicial, Pasajero pasajero, Vuelo vuelo, Equipaje equipaje) {
-		this.costoInicial = costoInicial;
+	public Facturacion(Pasajero pasajero, Vuelo vuelo, Equipaje equipaje) {
 		this.pasajero = pasajero;
 		this.vuelo = vuelo;
 		this.equipaje = equipaje;
-		//this.descuento = this.descuento();
+		this.costoInicial = this.costoInicial();
+		this.descuento = this.descuento();
 		//this.total = this.calcularCostos();
 	}
 	
@@ -32,9 +33,9 @@ public class Facturacion {
 	// Métodos
 	// *************************************************************************************************
 	
-	public int multaEquipaje() {
+	public double multaEquipaje() {
 		int i = 0;
-		int multa = 0;
+		double multa = 0;
 		while (i < this.pasajero.getEquipaje().size()) {
 			if (this.pasajero.getEquipaje().get(i).soprepeso() == true) {
 				if (this.pasajero.getEquipaje().get(i).getTipo().equals("Mano")) {
@@ -65,8 +66,23 @@ public class Facturacion {
 		}
 		return multa;
 	}
+	
+	public double descuento() {
+		double descuento = 0;
+		if (this.pasajero.isViajeroFrecuente()) {
+			descuento = this.costoInicial * 0.1;
+		}
+		else {
+			descuento = 0;
+		}
+		return descuento;
+	}
+	
+	public double costoInicial() {
+		double costo = this.vuelo.distancia() * 0.24;
+		return costo;
+	}
 	// multaCancelacion()
-	// descuento()
 	// calcularCostos()
 	// toString()
 	
@@ -74,34 +90,30 @@ public class Facturacion {
 	// Getters and Setters
 	// *************************************************************************************************
 	
-	public int getTotal() {
+	public double getTotal() {
 		return total;
 	}
-
-	public void setTotal(int total) {
+	public void setTotal(double total) {
 		this.total = total;
 	}
 
-	public int getDescuento() {
+	public double getDescuento() {
 		return descuento;
 	}
-
-	public void setDescuento(int descuento) {
+	public void setDescuento(double descuento) {
 		this.descuento = descuento;
 	}
 
-	public int getCostoInicial() {
+	public double getCostoInicial() {
 		return costoInicial;
 	}
-
-	public void setCostoInicial(int costoInicial) {
+	public void setCostoInicial(double costoInicial) {
 		this.costoInicial = costoInicial;
 	}
 
 	public Pasajero getPasajero() {
 		return pasajero;
 	}
-
 	public void setPasajero(Pasajero pasajero) {
 		this.pasajero = pasajero;
 	}
@@ -109,7 +121,6 @@ public class Facturacion {
 	public Vuelo getVuelo() {
 		return vuelo;
 	}
-
 	public void setVuelo(Vuelo vuelo) {
 		this.vuelo = vuelo;
 	}
@@ -117,7 +128,6 @@ public class Facturacion {
 	public Equipaje getEquipaje() {
 		return equipaje;
 	}
-
 	public void setEquipaje(Equipaje equipaje) {
 		this.equipaje = equipaje;
 	}
