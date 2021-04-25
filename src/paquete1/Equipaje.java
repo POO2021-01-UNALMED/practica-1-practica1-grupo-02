@@ -131,4 +131,7 @@ public class Equipaje {
 		this.tipo = tipo;
 	}
 	
+	// Métodos auxiliares
+	static public Equipaje nuevoEquipaje() { return null;} ////////// HACER ESTO
+	
 }
