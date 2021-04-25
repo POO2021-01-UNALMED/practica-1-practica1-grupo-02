@@ -6,26 +6,27 @@ public class Aeropuerto {
 	private String codigo;
 	private String nombre;
 	private String ciudad;
-	private  String pais;
+	private String pais;
 	private int altura;
-	private boolean estado;
+	private boolean estado; // true := disponible; false := no disponible
 	private float lat;
 	private float lon;
-	private ArrayList<Vuelo> vuelos = new ArrayList<Vuelo>();
+	ArrayList<Vuelo> vuelos = new ArrayList<Vuelo>();
+	public static Vector<Aeropuerto> aeropuertos = new Vector<Aeropuerto>();
 	
 	// constructor
 	
-	public Aeropuerto(String codigo, String nombre, String ciudad, String pais, int altura, boolean estado, float lat,
-			float lon, ArrayList<Vuelo> vuelos) {
+	public Aeropuerto(String codigo, String nombre, String ciudad, String pais, int altura, float lat, float lon) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.ciudad = ciudad;
 		this.pais = pais;
 		this.altura = altura;
-		this.estado = estado;
 		this.lat = lat;
 		this.lon = lon;
-		this.vuelos = vuelos;
+		this.estado = true;
+		Aeropuerto.aeropuertos.add(this);
+		
 	}
 
 	// Getters and setters  
@@ -102,7 +103,17 @@ public class Aeropuerto {
 		this.vuelos = vuelos;
 	}
 	
-	// Metodos
+	// Metodos auxiliares
+	static public Aeropuerto buscarAeropuerto(String codigo) {
+		Iterator<Aeropuerto> iteradorAeropuerto = aeropuertos.iterator();
+		while(iteradorAeropuerto.hasNext()) {
+			Aeropuerto aeropuerto = (Aeropuerto) iteradorAeropuerto.next();
+			if (aeropuerto.codigo == codigo) {
+				return aeropuerto;
+			}
+		}
+		return null;
+	}
 	
 	
 	

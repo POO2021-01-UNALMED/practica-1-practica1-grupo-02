@@ -1,6 +1,7 @@
 package paquete1;
 
 import java.util.ArrayList;
+import gestion.Vuelo;
 
 public class Pasajero extends Persona {
 	
@@ -11,9 +12,22 @@ public class Pasajero extends Persona {
 	//private String cobro;
 	private int millas;
 	private boolean viajeroFrecuente;
+	private Vuelo vuelo;
 	
 	
+	// ===========================================================================================
+	// CONSTRUCTOR
 	
+	
+	public Pasajero(String nombre, String pasaporte, Vuelo vuelo, String cumpleaños, String clase, boolean viajeroFrecuente) {
+		super(nombre, pasaporte);
+		//pasaporte = pasaporte2;
+		this.cumpleaños = cumpleaños;
+		this.clase = clase;
+		this.viajeroFrecuente = viajeroFrecuente;
+		this.vuelo = vuelo;
+		vuelo.pasajeros.add(this);
+	}
 	public String getClase() {
 		return clase;
 	}
@@ -54,6 +68,12 @@ public class Pasajero extends Persona {
 	}
 	public void setViajeroFrecuente(boolean viajeroFrecuente) {
 		this.viajeroFrecuente = viajeroFrecuente;
+	}
+	
+	// Métodos auxiliares
+	static public Pasajero nuevoPasajero(String nombre, String pasaporte, Vuelo vuelo, String cumpleanos, String clase, boolean frecuente) {
+		Pasajero pasajero = new Pasajero(nombre, pasaporte, vuelo, cumpleanos, clase, frecuente);
+		return pasajero;
 	}
 		
 }

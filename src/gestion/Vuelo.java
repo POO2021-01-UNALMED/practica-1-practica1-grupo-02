@@ -1,6 +1,5 @@
 package gestion;
 
-import java.util.Date;
 import java.util.Vector;
 import paquete1.Pasajero;
 import paquete1.Empleado;
@@ -11,22 +10,25 @@ public class Vuelo {
 	private String codigo;
 	private Aeropuerto lugarPartida;
 	private Aeropuerto destino;
-	private Date fecha;
-	private Vector<Pasajero> pasajeros = new Vector<>();
+	private String fecha;
+	public Vector<Pasajero> pasajeros = new Vector<>();
 	private Avion avion;
-	private Vector<Empleado> tripulacion = new Empleado<>();
+	private Vector<Empleado> tripulacion = new Vector<>();
 	private boolean estado;
 	private float costoGasolina;
+	static Vector<Vuelo> vuelos = new Vector<Vuelo>();
 	
 	// ================================================================================
 	// CONSTRUCTOR
-	public Vuelo(String codigo, Aeropuerto origen, Aeropuerto destino, Date fecha, Avion avion) {
+	public Vuelo(String codigo, Aeropuerto origen, Aeropuerto destino, String fecha, Avion avion) {
 		this.codigo = codigo;
 		this.lugarPartida = origen;
 		this.destino = destino;
 		this.fecha = fecha;
 		this.avion = avion;
 		avion.vuelos.add(this);
+		origen.vuelos.add(this);
+		destino.vuelos.add(this);
 	}
 	
 	// ================================================================================
@@ -34,12 +36,11 @@ public class Vuelo {
 	public void disponibilidad() {
 		// Obtener estados de disponibilidad
 		estado = false;
-		boolean origen = lugarPartida.isEstado();
-		boolean destino = destino.isEstado();
-		boolean vuelo = this.isDisponibilidad();
+		boolean origen = this.lugarPartida.isEstado();
+		boolean destino = this.destino.isEstado();
 		
 		// Modificar estado del vuelo
-		if (origen && destino && vuelo) {
+		if (origen && destino) {
 			estado = true;
 		}
 		
@@ -54,11 +55,11 @@ public class Vuelo {
 								"Todos los pasajeros recibirán millan en compensación");
 			for (Pasajero pasajero : pasajeros) {
 				if (pasajero.getClase().equals("A")) {
-					pasajero.setMillas() = getMillas() + 350;
+					pasajero.setMillas(pasajero.getMillas() + 350);
 					System.out.println("El pasajero " + pasajero.getNombre() + " ha recibido 350 millas.");
 				}
 				else if (pasajero.getClase().equals("B")) {
-					pasajero.setMillas() = getMillas() + 100;
+					pasajero.setMillas(pasajero.getMillas() + 100);
 					System.out.println("El pasajero " + pasajero.getNombre() + " ha recibido 100 millas.");
 				}
 			}
@@ -67,15 +68,15 @@ public class Vuelo {
 
 	public float distancia() {
 		// Valores basicos <- estan dados en radianes
-		float latDest = this.destino.getLat() / (180/Math.PI);;
-		float lonDest = this.destino.getLon() / (180/Math.PI);;
-		float latOrig = this.lugarPartida.getLat() / (180/Math.PI);;
-		float lonOrig = this.lugarPartida.getLon() / (180/Math.PI);;
+		float latDest = (float) (this.destino.getLat() / (180/Math.PI));;
+		float lonDest = (float) (this.destino.getLon() / (180/Math.PI));;
+		float latOrig = (float) (this.lugarPartida.getLat() / (180/Math.PI));;
+		float lonOrig = (float) (this.lugarPartida.getLon() / (180/Math.PI));;
 
 		// Se usa la ecuacion de Haversine
-		float distance = Math.sin(latDest) * Math.sin(latOrig);
+		float distance = (float) (Math.sin(latDest) * Math.sin(latOrig));
 		distance += Math.cos(latDest) * Math.cos(latOrig) * Math.cos(lonDest - lonOrig);
-		distance = Math.acos(distance);
+		distance = (float) Math.acos(distance);
 		distance = 3963 * distance;
 		return distance;
 	}
@@ -107,11 +108,11 @@ public class Vuelo {
 		this.destino = destino;
 	}
 
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 
@@ -148,24 +149,30 @@ public class Vuelo {
 	}
 
 	public int getCostoGasolina() {
-		return costoGasolina;
+		return (int) costoGasolina;
 	}
 
 	public void setCostoGasolina() {
-		float distancia = this.distancia() / 1.609;
+		float distancia = (float) (this.distancia() / 1.609);
 		float gasolina;
-		float totalEquipaje;
+		float totalEquipaje = 0;
 		gasolina = (this.pasajeros.size() + this.tripulacion.size()) * 100;
 		for (Pasajero pasajero : pasajeros) {
-			for (int i = 0; i < pasajero.equipaje.size(); i++) {
-				totalEquipaje += pasajero.equipaje.get(i).getMasa();
+			for (int i = 0; i < pasajero.getEquipaje().size(); i++) {
+				totalEquipaje += pasajero.getEquipaje().get(i).getMasa();
 			}
 		}
 		totalEquipaje += tripulacion.size()* 2 * 23;
 		totalEquipaje *= 1.05;
 		gasolina += this.avion.getMasa() + totalEquipaje;
-		gasolina *= 0.50;
-		this.costoGasolina = gasolina;
-		
+		gasolina *= 0.25 * distancia;
+		this.costoGasolina = gasolina;		
+	}
+	
+
+	// Métodos auxiliares
+	static public Vuelo nuevoVuelo(String codigo, Aeropuerto origen, Aeropuerto destino, String fecha, Avion avion) {
+		Vuelo vuelo = new Vuelo(codigo, origen, destino, fecha, avion);
+		return vuelo;
 	}
 }

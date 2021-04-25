@@ -1,26 +1,31 @@
 package gestion;
 
 import java.util.Vector;
+import java.util.Iterator;
 
 public class Avion {
 	// ================================================================================
 	// ATRIBUTOS
 	private String matricula;
-	private Vector<Vuelo> vuelos = new Vector<>();
+	Vector<Vuelo> vuelos = new Vector<>();
 	private String modelo;
 	private int capacidad;
 	private int numeroTripulacion;
 	private boolean disponibilidad;
-	
+	private int masa;
+	public static Vector<Avion> aviones = new Vector<Avion>();
+
 	// ================================================================================
 	// CONSTRUCTOR
-	public Avion(String matricula, String modelo, int capacidad, int tripulacion) {
+	public Avion(String matricula, String modelo, int capacidad, int tripulacion, int masa) {
 		this.matricula = matricula;
 		this.modelo = modelo;
 		this.capacidad = capacidad;
 		this.numeroTripulacion = tripulacion;
+		this.masa = masa;
+		Avion.aviones.add(this);
 	}
-	
+
 	// ================================================================================
 	// GETTERS Y SETTERS
 
@@ -72,4 +77,22 @@ public class Avion {
 		this.disponibilidad = disponibilidad;
 	}
 
+	public int getMasa() {
+		return masa;
+	}
+
+	public void setMasa(int masa) {
+		this.masa = masa;
+	}
+
+	// Metodos auxiliares
+	static public Avion buscarAvion(String matricula) {
+		Avion resultado = aviones.get(0);
+		for (Avion avion : aviones) {
+			if (matricula == avion.getMatricula()) {
+				resultado = avion;
+			}			
+		}
+		return resultado;
+	}
 }
