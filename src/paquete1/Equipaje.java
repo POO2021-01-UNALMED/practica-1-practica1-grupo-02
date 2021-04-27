@@ -33,6 +33,10 @@ public class Equipaje {
 	// Métodos
 	// *************************************************************************************************
 	
+	static public Equipaje nuevoEquipaje() {
+		return null;
+	}
+	
 	public boolean soprepeso() {
 		boolean sobrepeso = false;
 		if (this.permitido == true) {
@@ -100,7 +104,7 @@ public class Equipaje {
 	}
 	
 	// *************************************************************************************************
-	// Getters and Setters
+	// Getters & Setters
 	// *************************************************************************************************
 
 	public Pasajero getPasajero() {
@@ -130,8 +134,5 @@ public class Equipaje {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	
-	// Métodos auxiliares
-	static public Equipaje nuevoEquipaje() { return null;} ////////// HACER ESTO
 	
 }
