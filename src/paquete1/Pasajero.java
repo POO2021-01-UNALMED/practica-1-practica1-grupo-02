@@ -7,7 +7,7 @@ public class Pasajero extends Persona {
 	
 
 	private String cumpleaños;
-	private ArrayList<Equipaje> equipaje;
+	private ArrayList<Equipaje> equipaje; //**
 	private String clase;
 	private Facturacion cobro;
 	private int millas;
@@ -18,14 +18,14 @@ public class Pasajero extends Persona {
 	// CONSTRUCTOR
 	
 	public Pasajero(String nombre, Vuelo vuelo, String pasaporte, String cumpleaños, ArrayList<Equipaje> equipaje,
-			String clase, Facturacion cobro, int millas, boolean viajeroFrecuente) {
+			String clase, Facturacion cobro, boolean viajeroFrecuente) {
 		super(nombre, vuelo, pasaporte);
 		this.cumpleaños = cumpleaños;
-		this.equipaje = equipaje;
+		this.equipaje = equipaje; //**
 		this.clase = clase;
 		this.cobro = cobro;
-		this.millas = millas;
 		this.viajeroFrecuente = viajeroFrecuente;
+		vuelo.pasajeros.add(this);
 	}
 	
 	// Constructor auxiliar para la creacion de nuevos objetos de la clase Pasajero
@@ -80,6 +80,18 @@ public class Pasajero extends Persona {
 	}
 	
 	
+	public Facturacion getCobro() {
+		return cobro;
+	}
+
+	public void setCobro(Facturacion cobro) {
+		this.cobro = cobro;
+	}
+
+	public void setEquipaje(ArrayList<Equipaje> equipaje) {
+		this.equipaje = equipaje;
+	}
+
 	// ======================================================================
 	// Métodos auxiliares
 	static public Pasajero nuevoPasajero(String nombre, String pasaporte, Vuelo vuelo, String cumpleanos, String clase, boolean frecuente) {

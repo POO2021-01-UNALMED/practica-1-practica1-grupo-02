@@ -9,8 +9,31 @@ public class Empleado extends Persona {
 	private String cargo;
 	private String horarioTrabajo;
 	private boolean disponibilidad;
-	Vector<Empleado> empleados = new Vector<Empleado>();
+	private static Vector<Empleado> empleados = new Vector<Empleado>();
 
+	// =======================================================================
+	// CONSTRUCTOR
+	
+	public Empleado(String nombre, Vuelo vuelo, String pasaporte, String cargo, String horarioTrabajo,
+			boolean disponibilidad) {
+		super(nombre, vuelo, pasaporte);
+		this.cargo = cargo;
+		this.horarioTrabajo = horarioTrabajo;
+		this.disponibilidad = disponibilidad;
+		empleados.add(this);
+	}
+	
+
+
+	// Constructor auxiliar para la creacion de nuevos objetos de la clase Empleado	
+	public Empleado(String nombre, String pasaporte, String cargo, String horarioTrabajo) {
+		super(nombre, pasaporte);
+		this.cargo = cargo;
+		this.horarioTrabajo = horarioTrabajo;
+		this.disponibilidad = true;
+		empleados.add(this);
+	}
+	
 	// ======================================================================
 	// GETTERS Y SETTERS
 	
@@ -38,26 +61,14 @@ public class Empleado extends Persona {
 		this.disponibilidad = disponibilidad;
 	}
 
-	// =======================================================================
-	// CONSTRUCTOR
-	
-	public Empleado(String nombre, Vuelo vuelo, String pasaporte, String cargo, String horarioTrabajo,
-			boolean disponibilidad, Vector<Empleado> empleados) {
-		super(nombre, vuelo, pasaporte);
-		this.cargo = cargo;
-		this.horarioTrabajo = horarioTrabajo;
-		this.disponibilidad = disponibilidad;
-		this.empleados = empleados;
+	public static Vector<Empleado> getEmpleados() {
+		return empleados;
 	}
-	
-	// Constructor auxiliar para la creacion de nuevos objetos de la clase Empleado	
-	public Empleado(String nombre, String pasaporte, String cargo, String horarioTrabajo) {
-		super(nombre, pasaporte);
-		this.cargo = cargo;
-		this.horarioTrabajo = horarioTrabajo;
-		this.disponibilidad = true;
-		empleados.add(this);
+
+	public static void setEmpleados(Vector<Empleado> Listaempleados) {
+		empleados = Listaempleados;
 	}
+
 
 	// ==================================
 	// METODO AUXILIAR
@@ -65,7 +76,7 @@ public class Empleado extends Persona {
 	public static Empleado nuevoEmpleado(String nombre, String pasaporte, String cargo, String horario) {
 		Empleado empleado = new Empleado(nombre, pasaporte, cargo, horario);
 		return empleado;
-}
+	}
 
 
 
