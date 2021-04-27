@@ -2,6 +2,8 @@ package paquete1;
 
 import java.util.Vector;
 
+import gestion.Vuelo;
+
 public class Empleado extends Persona {
 
 	private String cargo;
@@ -11,6 +13,7 @@ public class Empleado extends Persona {
 
 	// ======================================================================
 	// GETTERS Y SETTERS
+	
 	public String getCargo() {
 		return cargo;
 	}
@@ -37,21 +40,24 @@ public class Empleado extends Persona {
 
 	// =======================================================================
 	// CONSTRUCTOR
-	public Empleado(String nombre, String pasaporte, String cargo, String horarioTrabajo) {
-		super(nombre, pasaporte);
+	
+	public Empleado(String nombre, Vuelo vuelo, String pasaporte, String cargo, String horarioTrabajo,
+			boolean disponibilidad, Vector<Empleado> empleados) {
+		super(nombre, vuelo, pasaporte);
 		this.cargo = cargo;
 		this.horarioTrabajo = horarioTrabajo;
-		this.disponibilidad = true;
-		empleados.add(this);
+		this.disponibilidad = disponibilidad;
+		this.empleados = empleados;
 	}
 
 	// ==================================
 	// METODO AUXILIAR
-	// Métodos auxiliares
 	
 	public static Empleado nuevoEmpleado(String nombre, String pasaporte, String cargo, String horario) {
 		Empleado empleado = new Empleado(nombre, pasaporte, cargo, horario);
 		return empleado;
 }
+
+
 
 }
