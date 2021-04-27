@@ -10,7 +10,7 @@ public class Pasajero extends Persona {
 	private ArrayList<Equipaje> equipaje; //**
 	private String clase;
 	private Facturacion cobro;
-	private int millas;
+	private float millas;
 	private boolean viajeroFrecuente;
 	
 	
@@ -65,10 +65,10 @@ public class Pasajero extends Persona {
 		this.cumpleaños = cumpleaños;
 	}
 	
-	public int getMillas() {
+	public float getMillas() {
 		return millas;
 	}
-	public void setMillas(int millas) {
+	public void setMillas(float millas) {
 		this.millas = millas;
 	}
 	
@@ -99,4 +99,11 @@ public class Pasajero extends Persona {
 		return pasajero;
 	}
 		
+	// ==================================
+	// METODOS
+	public void millaje() {
+		float distancia = this.getVuelo().distancia(this.getVuelo().getLugarPartida(), 
+				this.getVuelo().getDestino());  
+		millas += distancia/100;
+	}
 }
