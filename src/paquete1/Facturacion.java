@@ -8,23 +8,22 @@ public class Facturacion {
 	private double costoInicial = 0;
 	private Pasajero pasajero;
 	private Vuelo vuelo;
-	private Equipaje equipaje;
+
 	
 	// *************************************************************************************************
 	// Constructores
 	// *************************************************************************************************
 	
 	public Facturacion() {
-		this(null, null, null);
+		this(null, null);
 		this.descuento = 0;
 		this.total = 0;
 		this.costoInicial = 0;
 	}
 	
-	public Facturacion(Pasajero pasajero, Vuelo vuelo, Equipaje equipaje) {
+	public Facturacion(Pasajero pasajero, Vuelo vuelo) {
 		this.pasajero = pasajero;
 		this.vuelo = vuelo;
-		this.equipaje = equipaje;
 		this.costoInicial = this.costoInicial(pasajero.getVuelo().getLugarPartida(), pasajero.getVuelo().getDestino());
 		this.descuento = this.descuento();
 		//this.total = this.calcularCostos();
@@ -126,11 +125,5 @@ public class Facturacion {
 		this.vuelo = vuelo;
 	}
 
-	public Equipaje getEquipaje() {
-		return equipaje;
-	}
-	public void setEquipaje(Equipaje equipaje) {
-		this.equipaje = equipaje;
-	}
 	
 }
