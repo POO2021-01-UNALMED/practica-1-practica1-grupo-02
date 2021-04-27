@@ -87,12 +87,13 @@ public class Avion {
 
 	// Metodos auxiliares
 	static public Avion buscarAvion(String matricula) {
-		Avion resultado = aviones.get(0);
-		for (Avion avion : aviones) {
-			if (matricula == avion.getMatricula()) {
-				resultado = avion;
-			}			
+		Iterator<Avion> iteradorAvion = aviones.iterator();
+		while(iteradorAvion.hasNext()) {
+			Avion avion = (Avion) iteradorAvion.next();
+			if (avion.matricula.equals(matricula)) {
+				return avion;
+			}
 		}
-		return resultado;
+		return null;
 	}
 }

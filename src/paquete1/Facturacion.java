@@ -144,9 +144,6 @@ public class Facturacion {
 		Avion avionUno = new Avion("HK-2687", "Airbus A320neo", 153, 8, 120000);
 		Avion avionDos = new Avion("HK-7862", "Airbus A320neo", 153, 8, 120000);
 		Avion avionTres = new Avion("HK-6546", "Airbus A320neo", 153, 8, 120000);
-		for (Avion avion : Avion.aviones) {
-			System.out.println("Mi matrícula es: " + avion.getMatricula()); /////////////////////// BORRAR
-		}
 		
 		// ==== DESTINO DE LA COMPAÑÍA ====
 		Aeropuerto medellin = new Aeropuerto("MDE", "Aeropuerto Internacional José María Córdova",
@@ -161,13 +158,6 @@ public class Facturacion {
 				"Estados Unidos", 2, 25.793333F, -80.290556F);
 		Aeropuerto ciudadPanama = new Aeropuerto("PTY", "Aeropuerto Internacional de Tocumen",
 				"Ciudad de Panamá", "Panamá", 41, 9.071389F, -79.383611F);
-		
-		for (Aeropuerto aeropuerto : Aeropuerto.aeropuertos) {
-			System.out.println("Mi código es: " + aeropuerto.getCodigo()); /////////////////////// BORRAR
-		}
-		
-		System.out.println(Aeropuerto.aeropuertos.get(0).getCodigo()); /////////// BORRAR
-		System.out.println(Avion.aviones.get(1).getMatricula());	/////////////// BORRAR
 		
 		Scanner entrada = new Scanner(System.in);
 		// !!!!!!!! Agregar constructor con el nombre del archivo aquí !!!!!!!!!!!
@@ -229,10 +219,8 @@ public class Facturacion {
 		// Búsqueda del aeropuerto de origen
 		Aeropuerto aeroOrigen = Aeropuerto.buscarAeropuerto(aeropuertoOrigen);
 		if (aeroOrigen == null) {
-			System.out.println("XXXXDebe ingresar un código válido:\n" +
+			System.out.println("Debe ingresar un código válido:\n" +
 								"BOG, CLO, MDE, MIA, PTY o ADZ");
-			//// !!!! PREGUNTAR CÓMO RETORNAR AL MENÚ SI LA SELECCIÓN ES INVÁLIDA
-			System.out.println("el aeroOrigen es nulo");
 			return;
 		}
 		
@@ -244,25 +232,22 @@ public class Facturacion {
 								"Considere que debe ser diferente al anterior.");
 			System.out.println("el aeroDest es nulo");
 			return;
-			//// !!!! PREGUNTAR CÓMO RETORNAR AL MENÚ SI LA SELECCIÓN ES INVÁLIDA
 		}
 		
 		// Búsqueda del avión
 		Avion avion = Avion.buscarAvion(avionVuelo);
 		if (avion == null) {
-			System.out.println("ZZZZDebe ingresar una matrícula válida:\n" +
+			System.out.println("Debe ingresar una matrícula válida:\n" +
 								"HK-2687, HK-7862 o HK-6546\n" +
 								"Considere que debe ser diferente al anterior.");
-			System.out.println("el avion es nulo");
 			return;
-			//// !!!! PREGUNTAR CÓMO RETORNAR AL MENÚ SI LA SELECCIÓN ES INVÁLIDA
 		}
 		
 		//Vuelo vuelo = Vuelo.nuevoVuelo(codigoVuelo, aeroOrigen, aeroDestino, fechaVuelo, avion);
 		Vuelo vuelo = Vuelo.nuevoVuelo(codigoVuelo, Aeropuerto.aeropuertos.get(0), Aeropuerto.aeropuertos.get(1), fechaVuelo, Avion.aviones.get(1));
 		System.out.println("¡Muy bien! Se ha registro el vuelo " + codigoVuelo + " que parte de " +
-							aeroOrigen.getCiudad() + " con destino a " + aeroDestino.getCiudad() + ", con fecha " + 
-							vuelo.getFecha() + " y que será operado por POO Airways en el avión con matrícula " + avion.getMatricula() + "\n");
+							aeroOrigen.getCiudad() + "\ncon destino a " + aeroDestino.getCiudad() + ", con fecha " + 
+							vuelo.getFecha() + "\ny que será operado por POO Airways en el avión con matrícula " + avion.getMatricula() + "\n");
 		
 		System.out.println("OK!");
 	}

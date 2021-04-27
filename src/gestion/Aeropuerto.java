@@ -108,7 +108,7 @@ public class Aeropuerto {
 		Iterator<Aeropuerto> iteradorAeropuerto = aeropuertos.iterator();
 		while(iteradorAeropuerto.hasNext()) {
 			Aeropuerto aeropuerto = (Aeropuerto) iteradorAeropuerto.next();
-			if (aeropuerto.codigo == codigo) {
+			if (aeropuerto.codigo.equals(codigo)) {
 				return aeropuerto;
 			}
 		}
