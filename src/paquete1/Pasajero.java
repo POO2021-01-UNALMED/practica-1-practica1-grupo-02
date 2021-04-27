@@ -27,6 +27,16 @@ public class Pasajero extends Persona {
 		this.millas = millas;
 		this.viajeroFrecuente = viajeroFrecuente;
 	}
+	
+	// Constructor auxiliar para la creacion de nuevos objetos de la clase Pasajero
+	public Pasajero(String nombre, String pasaporte, Vuelo vuelo, String cumpleaños, String clase, boolean viajeroFrecuente) {
+		super(nombre, pasaporte);
+		this.cumpleaños = cumpleaños;
+		this.clase = clase;
+		this.viajeroFrecuente = viajeroFrecuente;
+		this.setVuelo(vuelo);
+		vuelo.pasajeros.add(this);
+	}
 
 
 

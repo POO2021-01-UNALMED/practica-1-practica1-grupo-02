@@ -49,6 +49,15 @@ public class Empleado extends Persona {
 		this.disponibilidad = disponibilidad;
 		this.empleados = empleados;
 	}
+	
+	// Constructor auxiliar para la creacion de nuevos objetos de la clase Empleado	
+	public Empleado(String nombre, String pasaporte, String cargo, String horarioTrabajo) {
+		super(nombre, pasaporte);
+		this.cargo = cargo;
+		this.horarioTrabajo = horarioTrabajo;
+		this.disponibilidad = true;
+		empleados.add(this);
+	}
 
 	// ==================================
 	// METODO AUXILIAR

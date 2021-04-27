@@ -19,6 +19,14 @@ public class Persona {
 		this.vuelo = vuelo;
 		this.pasaporte = pasaporte;
 	}
+	
+	
+	// Constructor auxiliar para la creacion de nuevos objetos Pasajero y Empleado
+	public Persona(String nombre, String pasaporte) {
+		super();
+		this.nombre = nombre;
+		this.pasaporte = pasaporte;
+	}
 
 	// ================================================================================
 	// GETTERS Y SETTERS

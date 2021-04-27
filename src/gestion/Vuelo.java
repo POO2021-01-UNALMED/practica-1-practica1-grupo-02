@@ -17,6 +17,7 @@ public class Vuelo {
 	private boolean estado;
 	private float costoGasolina;
 	static Vector<Vuelo> vuelos = new Vector<Vuelo>();
+	private float distancia;
 	
 	// ================================================================================
 	// CONSTRUCTOR
@@ -29,6 +30,8 @@ public class Vuelo {
 		avion.vuelos.add(this);
 		origen.vuelos.add(this);
 		destino.vuelos.add(this);
+		this.distancia = this.distancia();
+		this.setCostoGasolina();
 	}
 	
 	// ================================================================================
@@ -165,14 +168,37 @@ public class Vuelo {
 		totalEquipaje += tripulacion.size()* 2 * 23;
 		totalEquipaje *= 1.05;
 		gasolina += this.avion.getMasa() + totalEquipaje;
-		gasolina *= 0.25 * distancia;
+		gasolina *= 0.02 * distancia;
 		this.costoGasolina = gasolina;		
+	}	
+
+	public float getDistancia() {
+		return distancia;
 	}
-	
+
+	public void setDistancia(float distancia) {
+		this.distancia = distancia;
+	}
+
+	public static Vector<Vuelo> getVuelos() {
+		return vuelos;
+	}
+
+	public static void setVuelos(Vector<Vuelo> vuelos) {
+		Vuelo.vuelos = vuelos;
+	}
 
 	// Métodos auxiliares
 	static public Vuelo nuevoVuelo(String codigo, Aeropuerto origen, Aeropuerto destino, String fecha, Avion avion) {
 		Vuelo vuelo = new Vuelo(codigo, origen, destino, fecha, avion);
 		return vuelo;
 	}
+	
+	/*public String toString() {
+		return "El vuelo " + this.getCodigo() + " de POO Airways sale del aeropuerto " +  this.getLugarPartida().getCodigo() + " de la ciudad de " +
+				this.getLugarPartida().getCiudad() + "\n el día " +  this.getFecha() + " con destino al aeropuerto de " + this.getDestino().getCodigo() + 
+				" de la ciudad de " + this.getDestino().getCiudad() + ".\nDe momento este vuelo tiene " + this.getPasajeros().size() + "y se estima que" +
+				" su costo de gasolina equivale a unos $" + this.getCostoGasolina() + ".";
+	}*/
+	
 }
