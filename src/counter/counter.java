@@ -126,12 +126,12 @@ public class counter {
 
 		// Vuelo vuelo = Vuelo.nuevoVuelo(codigoVuelo, aeroOrigen, aeroDestino,
 		// fechaVuelo, avion);
-		Vuelo vuelo = Vuelo.nuevoVuelo(codigoVuelo, Aeropuerto.aeropuertos.get(0), Aeropuerto.aeropuertos.get(1),
-				fechaVuelo, Avion.aviones.get(1));
+		Vuelo vuelo = Vuelo.nuevoVuelo(codigoVuelo, aeroOrigen, aeroDestino, fechaVuelo, avion);
+		Vuelo.getVuelos().add(vuelo);
 		System.out.println("¡Muy bien! Se ha registro el vuelo " + codigoVuelo + " que parte de "
 				+ aeroOrigen.getCiudad() + "\ncon destino a " + aeroDestino.getCiudad() + ", con fecha "
 				+ vuelo.getFecha() + "\ny que será operado por POO Airways en el avión con matrícula "
-				+ avion.getMatricula() + "\n");
+				+ avion.getMatricula());
 		System.out.println("El costo de gasolina es de: " +  vuelo.getCostoGasolina() + ", con una distancia de: " + vuelo.getDistancia());
 		System.out.println("\n");
 	}
@@ -203,15 +203,12 @@ public class counter {
 	// ====================================================================================================
 	// 4. Mostrar los vuelos programados.
 	static void vuelosProgramados() {
-		Vector<Vuelo> programacion = Vuelo.getVuelos();
-		for (Vuelo vuelo : programacion) {
-			System.out.println("El vuelo " + vuelo.getCodigo() + " de POO Airways sale del aeropuerto " +  vuelo.getLugarPartida().getCodigo() + " de la ciudad de " +
-					vuelo.getLugarPartida().getCiudad() + "\n el día " +  vuelo.getFecha() + " con destino al aeropuerto de " + vuelo.getDestino().getCodigo() + 
-					" de la ciudad de " + vuelo.getDestino().getCiudad() + ".\nDe momento este vuelo tiene " + vuelo.getPasajeros().size() + "y se estima que" +
-					" su costo de gasolina equivale a unos $" + vuelo.getCostoGasolina() + ".");
+		System.out.println("Los vuelos programados en este momento son: ");
+		for (int i = 0; i < Vuelo.getVuelos().size(); i++) {
+			System.out.println(Vuelo.getVuelos().get(i).toString());
 		}
 		System.out.println("\n");
-	}
+;	}
 	
 	// ====================================================================================================
 	static String entradaTxt() {

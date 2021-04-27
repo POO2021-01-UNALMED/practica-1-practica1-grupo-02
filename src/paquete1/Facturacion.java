@@ -25,7 +25,7 @@ public class Facturacion {
 		this.pasajero = pasajero;
 		this.vuelo = vuelo;
 		this.equipaje = equipaje;
-		this.costoInicial = this.costoInicial();
+		this.costoInicial = this.costoInicial(pasajero.getVuelo().getLugarPartida(), pasajero.getVuelo().getDestino());
 		this.descuento = this.descuento();
 		//this.total = this.calcularCostos();
 	}
@@ -79,8 +79,8 @@ public class Facturacion {
 		return descuento;
 	}
 	
-	public double costoInicial() {
-		double costo = this.vuelo.distancia() * 0.24;
+	public double costoInicial(Aeropuerto origen, Aeropuerto destino) {
+		double costo = this.vuelo.distancia(origen, destino) * 0.24;
 		return costo;
 	}
 	// multaCancelacion()

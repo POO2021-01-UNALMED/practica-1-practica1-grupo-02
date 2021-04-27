@@ -30,8 +30,8 @@ public class Vuelo {
 		avion.vuelos.add(this);
 		origen.vuelos.add(this);
 		destino.vuelos.add(this);
-		this.distancia = this.distancia();
-		this.setCostoGasolina();
+		this.distancia = distancia(origen, destino);
+		this.setCostoGasolina(this.distancia);
 	}
 	
 	// ================================================================================
@@ -69,12 +69,12 @@ public class Vuelo {
 		}
 	}
 
-	public float distancia() {
+	public float distancia(Aeropuerto origen, Aeropuerto destino) {
 		// Valores basicos <- estan dados en radianes
-		float latDest = (float) (this.destino.getLat() / (180/Math.PI));;
-		float lonDest = (float) (this.destino.getLon() / (180/Math.PI));;
-		float latOrig = (float) (this.lugarPartida.getLat() / (180/Math.PI));;
-		float lonOrig = (float) (this.lugarPartida.getLon() / (180/Math.PI));;
+		float latDest = (float) (origen.getLat() / (180/Math.PI));;
+		float lonDest = (float) (origen.getLon() / (180/Math.PI));;
+		float latOrig = (float) (destino.getLat() / (180/Math.PI));;
+		float lonOrig = (float) (destino.getLon() / (180/Math.PI));;
 
 		// Se usa la ecuacion de Haversine
 		float distance = (float) (Math.sin(latDest) * Math.sin(latOrig));
@@ -155,8 +155,8 @@ public class Vuelo {
 		return (int) costoGasolina;
 	}
 
-	public void setCostoGasolina() {
-		float distancia = (float) (this.distancia() / 1.609);
+	public void setCostoGasolina(float distance) {
+		float distancia = (float) (distance / 1.609);
 		float gasolina;
 		float totalEquipaje = 0;
 		gasolina = (this.pasajeros.size() + this.tripulacion.size()) * 100;
@@ -168,7 +168,7 @@ public class Vuelo {
 		totalEquipaje += tripulacion.size()* 2 * 23;
 		totalEquipaje *= 1.05;
 		gasolina += this.avion.getMasa() + totalEquipaje;
-		gasolina *= 0.02 * distancia;
+		gasolina *= 0.002 * distancia;
 		this.costoGasolina = gasolina;		
 	}	
 
@@ -194,11 +194,11 @@ public class Vuelo {
 		return vuelo;
 	}
 	
-	/*public String toString() {
+	public String toString() {
 		return "El vuelo " + this.getCodigo() + " de POO Airways sale del aeropuerto " +  this.getLugarPartida().getCodigo() + " de la ciudad de " +
 				this.getLugarPartida().getCiudad() + "\n el día " +  this.getFecha() + " con destino al aeropuerto de " + this.getDestino().getCodigo() + 
 				" de la ciudad de " + this.getDestino().getCiudad() + ".\nDe momento este vuelo tiene " + this.getPasajeros().size() + "y se estima que" +
 				" su costo de gasolina equivale a unos $" + this.getCostoGasolina() + ".";
-	}*/
+	}
 	
 }
