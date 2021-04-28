@@ -1,4 +1,4 @@
-package counter;
+package uiMain;
 
 import java.util.Scanner;
 import java.util.Vector;
