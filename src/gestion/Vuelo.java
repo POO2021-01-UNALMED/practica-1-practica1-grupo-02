@@ -38,6 +38,7 @@ public class Vuelo {
 	// METODOS
 	public void disponibilidad() {
 		// Obtener estados de disponibilidad
+		// TODO Cambiar de void a String
 		estado = false;
 		boolean origen = this.lugarPartida.isEstado();
 		boolean destino = this.destino.isEstado();

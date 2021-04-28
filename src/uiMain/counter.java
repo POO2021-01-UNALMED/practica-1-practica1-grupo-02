@@ -164,6 +164,8 @@ public class counter {
 	// 3. Check-in de pasajero
 	static void checkIn() { /// TERMINAR
 		// Ingreso de la información necesaria
+		// TODO Lista de pasajeros como atributo de Pasajero para poder ir registrando a los pasajeros de la aerolínea
+		// y poder darles millas si vuelvan nuevamente con la aerolínea.
 		System.out.println("\n¿Cuál es el nombre completo del pasajero?");
 		String nombre = entradaTxt();
 		System.out.println("¿Cuál es el pasaporte del pasajero?");
