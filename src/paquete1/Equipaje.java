@@ -1,11 +1,9 @@
 package paquete1;
-//import java.util.*;
 
 public class Equipaje {
 	private Pasajero pasajero;
 	private String tipo;
 	private int masa;
-	//private ArrayList<String> rayosX = new ArrayList<String>(); 
 	private boolean permitido;
 	
 	// *************************************************************************************************
