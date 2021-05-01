@@ -94,6 +94,13 @@ public class Facturacion {
 		else {
 			descuento = 0;
 		}
+		
+		if (this.pasajero.getMillas() >= 1000 && this.pasajero.getMillas() <= 50000) {
+			double millaje = this.pasajero.getMillas()/100000;
+			millaje = millaje * 2;
+			double precio = this.costoInicial - descuento;
+			descuento = descuento + (precio * millaje);
+		}
 		return descuento;
 	}
 	
