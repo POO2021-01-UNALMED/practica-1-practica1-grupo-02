@@ -26,6 +26,7 @@ public class Pasajero extends Persona {
 		this.cobro = cobro;
 		this.viajeroFrecuente = viajeroFrecuente;
 		vuelo.pasajeros.add(this);
+		this.millaje();
 	}
 	
 	// Constructor auxiliar para la creacion de nuevos objetos de la clase Pasajero
@@ -36,6 +37,7 @@ public class Pasajero extends Persona {
 		this.viajeroFrecuente = viajeroFrecuente;
 		this.setVuelo(vuelo);
 		vuelo.pasajeros.add(this);
+		this.millaje();
 	}
 
 

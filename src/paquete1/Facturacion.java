@@ -96,10 +96,16 @@ public class Facturacion {
 		}
 		
 		if (this.pasajero.getMillas() >= 1000 && this.pasajero.getMillas() <= 50000) {
-			double millaje = this.pasajero.getMillas()/100000;
-			millaje = millaje * 2;
+			double descMillaje = this.pasajero.getMillas()/100000;
+			descMillaje = descMillaje * 2;
 			double precio = this.costoInicial - descuento;
-			descuento = descuento + (precio * millaje);
+			descuento = descuento + (precio * descMillaje);
+			this.pasajero.setMillas(0);
+		}
+		else if (this.pasajero.getMillas() > 50000) {
+			descuento = this.costoInicial;
+			float diferencia = this.pasajero.getMillas() - 50000;
+			this.pasajero.setMillas(diferencia);
 		}
 		return descuento;
 	}
