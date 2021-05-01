@@ -66,16 +66,16 @@ public class counter {
 				vuelosProgramados();
 				break;
 			case 5:
-				System.out.println("Hola");
+				flota();
 				break;
 			case 6:
-				System.out.println("Hola");
+				empleados();
 				break;
 			case 7:
-				System.out.println("Hola");
+				cambioEstadoAvion();
 				break;
 			case 8:
-				System.out.println("Hola");
+				cambioEstadoAeropuerto();
 				break;
 
 			}
@@ -178,8 +178,8 @@ public class counter {
 		int numeroMaletas = (int) entradaLong();
 		System.out.println("¿En qué clase vuelva el pasajero? Teclee la opcion adecuada.");
 		String clase;
-		System.out.println("\n1. Primera clase.");
-		System.out.println("2. Clase económica/turista.");
+		System.out.println("\n 1. Primera clase.");
+		System.out.println(" 2. Clase económica/turista.");
 		int opcion = (int) entradaLong();
 		// Registro de la clase según la opción que corresponda
 		switch (opcion) {
@@ -211,6 +211,93 @@ public class counter {
 		}
 		System.out.println("\n");
 ;	}
+	// ====================================================================================================
+	
+	// ====================================================================================================
+	// 5. Mostrar la flota de POO Airways.
+	static void flota() {
+		System.out.println("\n" + "La flota de POO Airways está conformada por: ");
+		for (int i = 0; i < Avion.getAviones().size(); i++) {
+			System.out.println(Avion.getAviones().get(i).toString());
+		}
+		System.out.println("\n");
+	}
+	
+	// ====================================================================================================
+	
+	// ====================================================================================================
+	// 6. Mostrar la flota de POO Airways.
+	static void empleados() {
+		System.out.println("\n" + "Los empleados de POO Airways son: ");
+		for (int i = 0; i < Empleado.getEmpleados().size(); i++) {
+			System.out.println(Empleado.getEmpleados().get(i).toString());
+			}
+		System.out.println("\n");
+		}
+		
+	// ====================================================================================================
+	
+	// ====================================================================================================
+	// 7. Cambio de estado de un avión.
+	static void cambioEstadoAvion() {
+		System.out.println("¿Al avión con qué matricula le desea cambiar el estado?");
+		System.out.println("1. HK-2687" + "\n2. HK-7862" + "\n3. HK-6546");
+		Avion avion = null;
+		int opcion = (int) entradaLong();
+		switch (opcion) {
+		case 1: avion = Avion.getAviones().get(0);
+		case 2: avion = Avion.getAviones().get(1);
+		case 3: avion = Avion.getAviones().get(2);
+		}
+		System.out.println("¿Cómo quiere situar la disponibilidad del avión?");
+		System.out.println(" 1. Disponible" + "\n 2. No disponible");
+		int opcion2 = (int) entradaLong();
+		switch (opcion2 ) {
+		case 1: avion.setDisponibilidad(true);
+		case 2: 
+			avion.setDisponibilidad(false);
+			for(int i = 0; i < avion.getVuelos().size(); i++) {
+				System.out.println("Canges por cancelación para los pasajeros del vuelo " + avion.getVuelos().get(i).getCodigo());
+				avion.getVuelos().get(i).disponibilidad();
+			}
+		}
+		System.out.println("\n");
+		
+		
+	}
+	// ====================================================================================================
+	
+	// ====================================================================================================
+	// 8. Cambiar el estado de un aeropuerto
+	static void cambioEstadoAeropuerto() {
+		System.out.println("¿Cuál es el código IATA del aeropuerto al cual le desea cambiar la disponibilidad?");
+		System.out.println(" 1. MDE\n 2. BOG\n 3. CLO\n 4. ADZ\n 5. MIA\n 6. PTY");
+		Aeropuerto aeropuerto = null;
+		int opcion = (int) entradaLong();
+		switch(opcion) {
+		case 1: aeropuerto = Aeropuerto.getAeropuertos().get(0);
+		case 2: aeropuerto = Aeropuerto.getAeropuertos().get(1);
+		case 3: aeropuerto = Aeropuerto.getAeropuertos().get(2);
+		case 4: aeropuerto = Aeropuerto.getAeropuertos().get(3);
+		case 5: aeropuerto = Aeropuerto.getAeropuertos().get(4);
+		case 6: aeropuerto = Aeropuerto.getAeropuertos().get(5);
+		}
+		System.out.println("¿Cómo quiere situar la disponibilidad del aeropuerto de " + aeropuerto.getCiudad() + "?");
+		System.out.println(" 1. Disponible" + "\n 2. No disponible");
+		int opcion2 = (int) entradaLong();
+		switch (opcion2 ) {
+		case 1: aeropuerto.setEstado(true);
+		case 2: 
+			aeropuerto.setEstado(false);
+			for(int i = 0; i < aeropuerto.getVuelos().size(); i++) {
+				System.out.println("Canges por cancelación para los pasajeros del vuelo " + aeropuerto.getVuelos().get(i).getCodigo());
+				aeropuerto.getVuelos().get(i).disponibilidad();
+			}
+		}
+		
+	}
+	
+	// ====================================================================================================
 	
 	// ====================================================================================================
 	static String entradaTxt() {

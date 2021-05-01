@@ -13,7 +13,7 @@ public class Avion {
 	private int numeroTripulacion;
 	private boolean disponibilidad;
 	private int masa;
-	public static Vector<Avion> aviones = new Vector<Avion>();
+	private static Vector<Avion> aviones = new Vector<Avion>();
 
 	// ================================================================================
 	// CONSTRUCTOR
@@ -28,6 +28,14 @@ public class Avion {
 
 	// ================================================================================
 	// GETTERS Y SETTERS
+	
+	public static Vector<Avion> getAviones() {
+		return aviones;
+	}
+
+	public static void setAviones(Vector<Avion> aviones) {
+		Avion.aviones = aviones;
+	}
 
 	public String getMatricula() {
 		return matricula;
@@ -96,4 +104,10 @@ public class Avion {
 		}
 		return null;
 	}
+	
+	public String toString() {
+		return "El avión con matrícula " + this.getMatricula() + " de la flota de POO Airways, corresponde a un " + this.getModelo() +
+				", cuenta con una capacidad de " + this.getCapacidad() + " pasajeros," + "\n" + "y para su operación requiere de una tripulación de " + 
+				this.getNumeroTripulacion() + " personas.";
+	} 
 }

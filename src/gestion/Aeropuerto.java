@@ -103,6 +103,14 @@ public class Aeropuerto {
 		this.vuelos = vuelos;
 	}
 	
+	public static Vector<Aeropuerto> getAeropuertos() {
+		return aeropuertos;
+	}
+
+	public static void setAeropuertos(Vector<Aeropuerto> aeropuertos) {
+		Aeropuerto.aeropuertos = aeropuertos;
+	}
+
 	// Metodos auxiliares
 	static public Aeropuerto buscarAeropuerto(String codigo) {
 		Iterator<Aeropuerto> iteradorAeropuerto = aeropuertos.iterator();

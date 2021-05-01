@@ -40,11 +40,12 @@ public class Vuelo {
 		// Obtener estados de disponibilidad
 		// TODO Cambiar de void a String
 		estado = false;
+		boolean aircraft = this.avion.isDisponibilidad();
 		boolean origen = this.lugarPartida.isEstado();
 		boolean destino = this.destino.isEstado();
 		
 		// Modificar estado del vuelo
-		if (origen && destino) {
+		if (origen && destino && aircraft) {
 			estado = true;
 		}
 		
@@ -56,7 +57,7 @@ public class Vuelo {
 		
 		else {
 			System.out.println("Lo sentimos, pero el vuelo ha sido cancelado\n" + 
-								"Todos los pasajeros recibirán millan en compensación");
+								"Todos los pasajeros recibirán millas en compensación");
 			for (Pasajero pasajero : pasajeros) {
 				if (pasajero.getClase().equals("A")) {
 					pasajero.setMillas(pasajero.getMillas() + 350);

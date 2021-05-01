@@ -77,6 +77,10 @@ public class Empleado extends Persona {
 		Empleado empleado = new Empleado(nombre, pasaporte, cargo, horario);
 		return empleado;
 	}
+	
+	public String toString() {
+		return "- " + this.getNombre() + " se desempeña como " + this.getCargo() + " en el horario de " + this.getHorarioTrabajo() + ".";
+	} 
 
 
 
