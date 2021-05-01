@@ -8,6 +8,7 @@ public class Facturacion {
 	private double costoInicial = 0;
 	private Pasajero pasajero;
 	private Vuelo vuelo;
+	private boolean multas = false;
 
 	
 	// *************************************************************************************************
@@ -26,7 +27,7 @@ public class Facturacion {
 		this.vuelo = vuelo;
 		this.costoInicial = this.costoInicial(pasajero.getVuelo().getLugarPartida(), pasajero.getVuelo().getDestino());
 		this.descuento = this.descuento();
-		//this.total = this.calcularCostos();
+		this.total = this.calcularCostos();
 	}
 	
 	// *************************************************************************************************
@@ -38,6 +39,7 @@ public class Facturacion {
 		double multa = 0;
 		while (i < this.pasajero.getEquipaje().size()) {
 			if (this.pasajero.getEquipaje().get(i).soprepeso() == true) {
+				this.multas = true;
 				if (this.pasajero.getEquipaje().get(i).getTipo().equals("Mano")) {
 					if (this.pasajero.getClase().equals("Primera Clase")) {
 						int tope = this.pasajero.getEquipaje().get(i).getMasa() - 12;
@@ -64,6 +66,23 @@ public class Facturacion {
 			}
 			i ++;
 		}
+		
+		if (this.pasajero.getClase().equals("Primera Clase")) {
+			if (this.pasajero.getEquipaje().size() > 4) {
+				this.multas = true;
+				double carga = this.pasajero.getEquipaje().size() - 4;
+				carga = carga*35;
+				multa = multa + carga;
+			}
+		}
+		else {
+			if (this.pasajero.getEquipaje().size() > 3) {
+				this.multas = true;
+				double carga = this.pasajero.getEquipaje().size() - 3;
+				carga = carga*35;
+				multa = multa + carga;
+			}
+		}
 		return multa;
 	}
 	
@@ -75,6 +94,19 @@ public class Facturacion {
 		else {
 			descuento = 0;
 		}
+		
+		if (this.pasajero.getMillas() >= 1000 && this.pasajero.getMillas() <= 50000) {
+			double descMillaje = this.pasajero.getMillas()/100000;
+			descMillaje = descMillaje * 2;
+			double precio = this.costoInicial - descuento;
+			descuento = descuento + (precio * descMillaje);
+			this.pasajero.setMillas(0);
+		}
+		else if (this.pasajero.getMillas() > 50000) {
+			descuento = this.costoInicial;
+			float diferencia = this.pasajero.getMillas() - 50000;
+			this.pasajero.setMillas(diferencia);
+		}
 		return descuento;
 	}
 	
@@ -82,9 +114,31 @@ public class Facturacion {
 		double costo = this.vuelo.distancia(origen, destino) * 0.24;
 		return costo;
 	}
-	// multaCancelacion()
-	// calcularCostos()
-	// toString()
+	
+	public double calcularCostos() {
+		return this.costoInicial + this.multaEquipaje() - this.descuento;
+	}
+	public String toString() {
+		if(this.multas) {
+			return "*******************************************************"+"\n"+
+					"FACTURACIÓN DEL PASAJERO: "+this.pasajero.getNombre()+"\n"+
+					"COSTO DEL VUELO: "+this.costoInicial+"\n"+
+					"DESCUENTOS: "+this.descuento+"\n"+
+					"**** EL PASAJERO PRESENTA MULTAS ****"+"\n"+
+					"MULTA POR EQUIPAJE: "+this.multaEquipaje()+"\n"+"\n"+
+					"TOTAL A COBRAR: "+this.total+"\n"+
+					"*******************************************************";
+		}
+		else {
+			return "*******************************************************"+"\n"+
+					"FACTURACIÓN DEL PASAJERO: "+this.pasajero.getNombre()+"\n"+
+					"COSTO DEL VUELO: "+this.costoInicial+"\n"+
+					"DESCUENTOS: "+this.descuento+"\n"+
+					"**** EL PASAJERO NO PRESENTA MULTAS ****"+"\n"+"\n"+
+					"TOTAL A COBRAR: "+this.total+"\n"+
+					"*******************************************************";
+		}
+	}
 	
 	// *************************************************************************************************
 	// Getters & Setters
@@ -125,5 +179,11 @@ public class Facturacion {
 		this.vuelo = vuelo;
 	}
 
+	public boolean isMultas() {
+		return multas;
+	}
+	public void setMultas(boolean multas) {
+		this.multas = multas;
+	}
 	
 }
