@@ -106,6 +106,6 @@ public class Pasajero extends Persona {
 	public void millaje() {
 		float distancia = this.getVuelo().distancia(this.getVuelo().getLugarPartida(), 
 				this.getVuelo().getDestino());  
-		millas += distancia/100;
+		this.millas += distancia/100;
 	}
 }

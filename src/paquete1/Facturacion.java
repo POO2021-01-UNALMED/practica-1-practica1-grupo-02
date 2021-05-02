@@ -9,6 +9,7 @@ public class Facturacion {
 	private Pasajero pasajero;
 	private Vuelo vuelo;
 	private boolean multas = false;
+	private boolean canjeaMillas = false;
 
 	
 	// *************************************************************************************************
@@ -95,19 +96,31 @@ public class Facturacion {
 			descuento = 0;
 		}
 		
-		if (this.pasajero.getMillas() >= 1000 && this.pasajero.getMillas() <= 50000) {
-			double descMillaje = this.pasajero.getMillas()/100000;
+		return descuento;
+	}
+	
+	public double canjearMillas(float millas) {
+		this.canjeaMillas = true;
+		double descMillaje = 0;
+		if (millas >= 1000 && millas <= 50000 && this.pasajero.getMillas() >= millas) {
+			descMillaje = millas/100000;
 			descMillaje = descMillaje * 2;
-			double precio = this.costoInicial - descuento;
-			descuento = descuento + (precio * descMillaje);
-			this.pasajero.setMillas(0);
+			double precio = this.costoInicial - this.descuento();
+			descMillaje = precio * descMillaje;
+			float millasActuales = this.pasajero.getMillas() - millas;
+			this.pasajero.setMillas(millasActuales);
 		}
-		else if (this.pasajero.getMillas() > 50000) {
-			descuento = this.costoInicial;
+		else if (millas > 50000 && this.pasajero.getMillas() >= millas) {
+			descMillaje = this.costoInicial - this.descuento();
 			float diferencia = this.pasajero.getMillas() - 50000;
 			this.pasajero.setMillas(diferencia);
 		}
-		return descuento;
+		else {
+			this.canjeaMillas = false;
+			descMillaje = 0;
+		}
+		
+		return descMillaje;
 	}
 	
 	public double costoInicial(Aeropuerto origen, Aeropuerto destino) {
@@ -116,10 +129,15 @@ public class Facturacion {
 	}
 	
 	public double calcularCostos() {
-		return this.costoInicial + this.multaEquipaje() - this.descuento;
+		if (this.canjeaMillas) {
+			return this.costoInicial + this.multaEquipaje() - this.descuento - this.canjearMillas();
+		}
+		else {
+			return this.costoInicial + this.multaEquipaje() - this.descuento;
+		}
 	}
 	public String toString() {
-		if(this.multas) {
+		if(this.multas && this.canjeaMillas) {
 			return "*******************************************************"+"\n"+
 					"FACTURACIÓN DEL PASAJERO: "+this.pasajero.getNombre()+"\n"+
 					"COSTO DEL VUELO: "+this.costoInicial+"\n"+
@@ -185,5 +203,14 @@ public class Facturacion {
 	public void setMultas(boolean multas) {
 		this.multas = multas;
 	}
+
+	public boolean isCanjeaMillas() {
+		return canjeaMillas;
+	}
+	public void setCanjeaMillas(boolean canjeaMillas) {
+		this.canjeaMillas = canjeaMillas;
+	}
+	
+	
 	
 }
