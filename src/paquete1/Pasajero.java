@@ -7,11 +7,12 @@ public class Pasajero extends Persona {
 	
 
 	private String cumpleaños;
-	private ArrayList<Equipaje> equipaje; //**
+	private ArrayList<Equipaje> equipaje;
 	private String clase;
 	private Facturacion cobro;
 	private float millas;
 	private boolean viajeroFrecuente;
+	static private ArrayList<Pasajero> pasajeros;
 	
 	
 	// ===========================================================================================
@@ -26,6 +27,7 @@ public class Pasajero extends Persona {
 		this.cobro = cobro;
 		this.viajeroFrecuente = viajeroFrecuente;
 		vuelo.pasajeros.add(this);
+		pasajeros.add(this);
 		this.millaje();
 	}
 	
@@ -37,6 +39,7 @@ public class Pasajero extends Persona {
 		this.viajeroFrecuente = viajeroFrecuente;
 		this.setVuelo(vuelo);
 		vuelo.pasajeros.add(this);
+		pasajeros.add(this);
 		this.millaje();
 	}
 
@@ -99,6 +102,22 @@ public class Pasajero extends Persona {
 	static public Pasajero nuevoPasajero(String nombre, String pasaporte, Vuelo vuelo, String cumpleanos, String clase, boolean frecuente) {
 		Pasajero pasajero = new Pasajero(nombre, pasaporte, vuelo, cumpleanos, clase, frecuente);
 		return pasajero;
+	}
+	
+	public static Pasajero encontrarPasajero(String codigo) {
+		int i = 0;
+		Pasajero encontrado = null;
+		while (i < pasajeros.size()) {
+			if (pasajeros.get(i).getPasaporte().equals(codigo)) {
+				encontrado = pasajeros.get(i);
+				break;
+			}
+			else {
+				encontrado = null;
+			}
+			i++;
+		}
+		return encontrado;
 	}
 		
 	// ==================================

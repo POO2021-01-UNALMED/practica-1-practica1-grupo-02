@@ -3,10 +3,8 @@ package uiMain;
 import java.util.Scanner;
 import java.util.Vector;
 
-import gestion.Aeropuerto;
-import gestion.Avion;
-import gestion.Vuelo;
-import paquete1.Empleado;
+import gestion.*;
+import paquete1.*;
 
 public class counter {
 	static Scanner entrada = new Scanner(System.in);
@@ -162,31 +160,67 @@ public class counter {
 	
 	// ====================================================================================================
 	// 3. Check-in de pasajero
-	static void checkIn() { /// TERMINAR
+	static void checkIn() {
 		// Ingreso de la información necesaria
 		// TODO Lista de pasajeros como atributo de Pasajero para poder ir registrando a los pasajeros de la aerolínea
 		// y poder darles millas si vuelvan nuevamente con la aerolínea.
 		System.out.println("\n¿Cuál es el nombre completo del pasajero?");
 		String nombre = entradaTxt();
-		System.out.println("¿Cuál es el pasaporte del pasajero?");
-		String pasaporte = entradaTxt();
-		System.out.println("¿En qué vuelo va a viajar el pasajero?");
-		String vuelo = entradaTxt();
+		System.out.println("Ingrese el número del pasaporte (5 dígitos).");
+		String num = entradaTxt();
+		while (num.length() != 5 || Pasajero.encontrarPasajero(num) != null) {
+			System.out.println("El número ingresado no es válido o ya se encuentra registrado.");
+			num = entradaTxt();
+		}
+		String pasaporte = num;
+		System.out.println("¿En qué vuelo va a viajar el pasajero? Ingrese el código del vuelo");
+		String codigo = entradaTxt();
+		Vuelo vuelo;
+		while (Vuelo.getVuelo(codigo) == null) {
+			System.out.println("Por favor, ingrese un código válido de vuelo");
+			codigo = entradaTxt();
+		}
+		vuelo = Vuelo.getVuelo(codigo);
 		System.out.println("¿Cuál es la fecha de nacimiento del pasajero? DD/MM/YYYY");
 		String cumpleanos = entradaTxt();
-		System.out.println("¿Cuántas maletas lleva el pasajero para guardar en bodega?");
-		int numeroMaletas = (int) entradaLong();
 		System.out.println("¿En qué clase vuelva el pasajero? Teclee la opcion adecuada.");
 		String clase;
-		System.out.println("\n 1. Primera clase.");
-		System.out.println(" 2. Clase económica/turista.");
+		System.out.println("\n 1. Primera Clase.");
+		System.out.println(" 2. Clase Económica/Turista.");
 		int opcion = (int) entradaLong();
 		// Registro de la clase según la opción que corresponda
-		switch (opcion) {
-		case 1:
-			clase = "A";
-		case 2:
-			clase = "B";
+		while (opcion != 1 && opcion != 2) {
+			System.out.println("Ingrese sólo 1 ó 2");
+			opcion = (int) entradaLong();
+		}
+		if (opcion == 1) {
+			clase = "Primera Clase";
+		}
+		else {
+			clase = "Clase Turista";
+		}
+		// Se crea un pasajero con la información que se lleva hasta el momento
+		Pasajero pasAux = Pasajero.nuevoPasajero(nombre, pasaporte, vuelo, cumpleanos, clase, false);
+		System.out.println("¿Cuántas maletas lleva el pasajero para guardar en bodega?");
+		int numeroMaletasB = (int) entradaLong();
+		int i = 0;
+		while (i < numeroMaletasB) {
+			System.out.println("Ingrese el peso de la maleta número "+i+" (En kg y números enteros)."+"\n"+
+								"Nota: El peso máximo es de 25 kg para Primera Clase y de 20 kg para la Clase Turista "+"\n"+
+								"Se le cobrará multa por cada kg adicional.");
+			int pesoB = (int) entradaLong();
+			new Equipaje(pasAux, "Bodega", pesoB);
+			i++;
+		}
+		System.out.println("¿Cuántas maletas de mano lleva?");
+		int numeroMaletasM = (int) entradaLong();
+		while (i < numeroMaletasM) {
+			System.out.println("Ingrese el peso de la maleta número "+i+" (En kg y números enteros)."+"\n"+
+								"Nota: El peso máximo es de 25 kg para Primera Clase y de 20 kg para la Clase Turista "+"\n"+
+								"	   Se le cobrará multa por cada kg adicional.");
+			int pesoM = (int) entradaLong();
+			new Equipaje(pasAux, "Mano", pesoM);
+			i++;
 		}
 		System.out.println("¿El pasajero es miembro del programa de viajero frecuente?");
 		String frecuente = entradaTxt();

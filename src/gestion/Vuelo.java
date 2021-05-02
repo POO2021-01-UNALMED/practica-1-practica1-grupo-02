@@ -30,6 +30,7 @@ public class Vuelo {
 		avion.vuelos.add(this);
 		origen.vuelos.add(this);
 		destino.vuelos.add(this);
+		vuelos.add(this);
 		this.distancia = distancia(origen, destino);
 		this.setCostoGasolina(this.distancia);
 	}
@@ -201,6 +202,22 @@ public class Vuelo {
 				this.getLugarPartida().getCiudad() + "\n el día " +  this.getFecha() + " con destino al aeropuerto de " + this.getDestino().getCodigo() + 
 				" de la ciudad de " + this.getDestino().getCiudad() + ".\nDe momento este vuelo tiene " + this.getPasajeros().size() + "y se estima que" +
 				" su costo de gasolina equivale a unos $" + this.getCostoGasolina() + ".";
+	}
+	
+	public static Vuelo getVuelo(String codigo) {
+		int i = 0;
+		Vuelo encontrado = null;
+		while (i < vuelos.size()) {
+			if (vuelos.get(i).getCodigo().equals(codigo)) {
+				encontrado = vuelos.get(i);
+				break;
+			}
+			else {
+				encontrado = null;
+			}
+			i++;
+		}
+		return encontrado;
 	}
 	
 }

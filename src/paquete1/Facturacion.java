@@ -130,7 +130,7 @@ public class Facturacion {
 	
 	public double calcularCostos() {
 		if (this.canjeaMillas) {
-			return this.costoInicial + this.multaEquipaje() - this.descuento - this.canjearMillas();
+			return this.costoInicial + this.multaEquipaje() - this.descuento;
 		}
 		else {
 			return this.costoInicial + this.multaEquipaje() - this.descuento;
