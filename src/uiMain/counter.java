@@ -213,6 +213,7 @@ public class counter {
 			int pesoB = (int) entradaLong();
 			new Equipaje(pasAux, "Bodega", pesoB);
 			i++;
+			x++;
 		}
 		System.out.println("¿Cuántas maletas de mano lleva?");
 		int numeroMaletasM = (int) entradaLong();
@@ -226,6 +227,7 @@ public class counter {
 			int pesoM = (int) entradaLong();
 			new Equipaje(pasAux, "Mano", pesoM);
 			j++;
+			h++;
 		}
 		if (pasAux.getClase().equals("Primera Clase")) {
 			if (numeroMaletasM + numeroMaletasB > 4) {
@@ -255,7 +257,7 @@ public class counter {
 		System.out.println("¡Inscripción finalizada con éxito!");
 		System.out.println("Pulse 1 para ver el resumen de la inscripción.");
 		System.out.println("Pulse 2 para ver la facturación del pasajero.");
-		System.out.println("Pulse 3 para salir.");
+		System.out.println("Pulse 3 para salir al menú principal.");
 		int opc = (int) entradaLong();
 		while (opc != 1 && opc != 2 && opc != 3) {
 			System.out.println("Pulse un número válido.");
@@ -267,7 +269,21 @@ public class counter {
 		else if (opc == 2) {
 			System.out.println(pasAux.getCobro());
 		}
-
+		
+		System.out.println("Pulse 1 para ver el resumen de la inscripción.");
+		System.out.println("Pulse 2 para ver la facturación del pasajero.");
+		System.out.println("Pulse 3 para salir al menú principal.");
+		opc = (int) entradaLong();
+		while (opc != 1 && opc != 2 && opc != 3) {
+			System.out.println("Pulse un número válido.");
+			opc = (int) entradaLong();
+		}
+		if (opc == 1) {
+			System.out.println(pasAux);
+		}
+		else if (opc == 2) {
+			System.out.println(pasAux.getCobro());
+		}
 	}
 	// ====================================================================================================
 	
