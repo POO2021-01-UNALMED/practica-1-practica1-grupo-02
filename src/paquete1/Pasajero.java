@@ -131,8 +131,8 @@ public class Pasajero extends Persona {
 	}
 	
 	public String toString() {
-		return "El pasajero "+this.getNombre()+" ha sido inscrito al vuelo "+this.getVuelo().getCodigo()+"\n"+
-				"que parte desde "+this.getVuelo().getLugarPartida().getCiudad()+" con destino a la ciudad de "+this.getVuelo().getDestino().getCiudad()+"\n"+
+		return "El pasajero "+this.getNombre()+" ha sido inscrito al vuelo "+this.getVuelo().getCodigo()+" que parte"+"\n"+
+				"desde "+this.getVuelo().getLugarPartida().getCiudad()+", "+this.getVuelo().getLugarPartida().getPais()+" con destino en la ciudad de "+this.getVuelo().getDestino().getCiudad()+", "+this.getVuelo().getDestino().getPais()+"\n"+
 				"El vuelo partirá el día "+this.getVuelo().getFecha();
 	}
 }

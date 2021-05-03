@@ -109,7 +109,7 @@ public class counter {
 		System.out.println("¿Cuál es el código del vuelo?");
 		String codigoVuelo = entradaTxt();
 
-		System.out.println("¿Cuándo sale el vuelo?");
+		System.out.println("¿Cuándo sale el vuelo? DD/MM/YYYY");
 		String fechaVuelo = entradaTxt();
 
 		System.out.println("¿Cuál es la matrícula del avión a utilizar?");
@@ -130,7 +130,7 @@ public class counter {
 				+ aeroOrigen.getCiudad() + "\ncon destino a " + aeroDestino.getCiudad() + ", con fecha "
 				+ vuelo.getFecha() + "\ny que será operado por POO Airways en el avión con matrícula "
 				+ avion.getMatricula());
-		System.out.println("El costo de gasolina es de: " +  vuelo.getCostoGasolina() + ", con una distancia de: " + vuelo.getDistancia());
+		System.out.println("El costo de gasolina es de: " +  vuelo.getCostoGasolina() + " USD, con una distancia de: " + vuelo.getDistancia() + " millas.");
 		System.out.println("\n");
 	}
 	// ====================================================================================================
@@ -241,19 +241,25 @@ public class counter {
 									"se le cobrarán 35 USD por cada maleta adicional.");
 			}
 		}
-		System.out.println("¿El pasajero es miembro del programa de viajero frecuente?"+"\n"+
-							"Reponda S o N");
+		System.out.println("¿El pasajero es miembro del programa de viajero frecuente?");
 		String frecuente = entradaTxt();
 		while (!(frecuente.equals("S")) && !(frecuente.equals("N"))) {
 			System.out.println("Reponda S o N");
 			frecuente = entradaTxt();
 		}
+		
 		if (frecuente.equals("S")) {
 			pasAux.setViajeroFrecuente(true);
 		}
 		else {
 			pasAux.setViajeroFrecuente(false);
 		}
+		
+		//pasAux.getCobro().costoInicial();
+		//pasAux.getCobro().descuento();
+		//pasAux.getCobro().multaEquipaje();
+		pasAux.getCobro().calcularCostos();
+		
 		System.out.println("¡Inscripción finalizada con éxito!");
 		System.out.println("Pulse 1 para ver el resumen de la inscripción.");
 		System.out.println("Pulse 2 para ver la facturación del pasajero.");

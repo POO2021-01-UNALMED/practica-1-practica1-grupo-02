@@ -201,7 +201,7 @@ public class Vuelo {
 		return "El vuelo " + this.getCodigo() + " de POO Airways sale del aeropuerto " +  this.getLugarPartida().getCodigo() + " de la ciudad de " +
 				this.getLugarPartida().getCiudad() + "\n el día " +  this.getFecha() + " con destino al aeropuerto de " + this.getDestino().getCodigo() + 
 				" de la ciudad de " + this.getDestino().getCiudad() + ".\nDe momento este vuelo tiene " + this.getPasajeros().size() + "y se estima que" +
-				" su costo de gasolina equivale a unos $" + this.getCostoGasolina() + ".";
+				" su costo de gasolina equivale a unos " + this.getCostoGasolina() + " USD.";
 	}
 	
 	public static Vuelo getVuelo(String codigo) {

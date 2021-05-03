@@ -25,6 +25,7 @@ public class Equipaje {
 		if (this.permitido) {
 			this.pasajero.nuevoEquipaje(this);
 		}
+		this.soprepeso();
 	}
 	
 	// *************************************************************************************************
@@ -85,7 +86,6 @@ public class Equipaje {
 		}
 		else {
 			ok = false;
-			System.out.println("El equipaje solo puede ser de tipo Bodega o de tipo Mano");
 		}
 		return ok;
 	}
