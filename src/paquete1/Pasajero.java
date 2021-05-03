@@ -7,7 +7,7 @@ public class Pasajero extends Persona {
 	
 
 	private String cumpleaños;
-	private ArrayList<Equipaje> equipaje;
+	private ArrayList<Equipaje> equipaje = new ArrayList<Equipaje>();
 	private String clase;
 	private Facturacion cobro;
 	private float millas;

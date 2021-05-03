@@ -204,8 +204,10 @@ public class counter {
 		System.out.println("¿Cuántas maletas lleva el pasajero para guardar en bodega?");
 		int numeroMaletasB = (int) entradaLong();
 		int i = 0;
+		int x = i+1;
 		while (i < numeroMaletasB) {
-			System.out.println("Ingrese el peso de la maleta número "+i+" (En kg y números enteros)."+"\n"+
+			System.out.println("Ingrese el peso de la maleta número "+x+" (En kg y números enteros)."+"\n"+
+								"-------------------------------------------------------------------"+"\n"+
 								"Nota: El peso máximo es de 25 kg para Primera Clase y de 20 kg para la Clase Turista "+"\n"+
 								"Se le cobrará multa por cada kg adicional.");
 			int pesoB = (int) entradaLong();
@@ -214,13 +216,16 @@ public class counter {
 		}
 		System.out.println("¿Cuántas maletas de mano lleva?");
 		int numeroMaletasM = (int) entradaLong();
-		while (i < numeroMaletasM) {
-			System.out.println("Ingrese el peso de la maleta número "+i+" (En kg y números enteros)."+"\n"+
-								"Nota: El peso máximo es de 25 kg para Primera Clase y de 20 kg para la Clase Turista "+"\n"+
+		int j = 0;
+		int h = j+1;
+		while (j < numeroMaletasM) {
+			System.out.println("Ingrese el peso de la maleta número "+h+" (En kg y números enteros)."+"\n"+
+								"-------------------------------------------------------------------"+"\n"+
+								"Nota: El peso máximo es de 12 kg para Primera Clase y de 10 kg para la Clase Turista "+"\n"+
 								"	   Se le cobrará multa por cada kg adicional.");
 			int pesoM = (int) entradaLong();
 			new Equipaje(pasAux, "Mano", pesoM);
-			i++;
+			j++;
 		}
 		if (pasAux.getClase().equals("Primera Clase")) {
 			if (numeroMaletasM + numeroMaletasB > 4) {
@@ -237,8 +242,15 @@ public class counter {
 		System.out.println("¿El pasajero es miembro del programa de viajero frecuente?"+"\n"+
 							"Reponda S o N");
 		String frecuente = entradaTxt();
+		while (!(frecuente.equals("S")) && !(frecuente.equals("N"))) {
+			System.out.println("Reponda S o N");
+			frecuente = entradaTxt();
+		}
 		if (frecuente.equals("S")) {
 			pasAux.setViajeroFrecuente(true);
+		}
+		else {
+			pasAux.setViajeroFrecuente(false);
 		}
 		System.out.println("¡Inscripción finalizada con éxito!");
 		System.out.println("Pulse 1 para ver el resumen de la inscripción.");
