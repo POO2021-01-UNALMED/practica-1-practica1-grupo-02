@@ -90,20 +90,21 @@ public class counter {
 		String aeropuertoOrigen = entradaTxt();
 		// Búsqueda del aeropuerto de origen
 		Aeropuerto aeroOrigen = Aeropuerto.buscarAeropuerto(aeropuertoOrigen);
-		if (aeroOrigen == null) {
+		while (aeroOrigen == null) {
 			System.out.println("Debe ingresar un código válido:\n" + "BOG, CLO, MDE, MIA, PTY o ADZ");
-			return;
+			aeropuertoOrigen = entradaTxt();
+			aeroOrigen = Aeropuerto.buscarAeropuerto(aeropuertoOrigen);
 		}
 
 		System.out.println("¿Cuál es el código IATA del aeropuerto de destino?");
 		String aeropuertoDestino = entradaTxt();
 		// Búsqueda del aeropuerto de destino
 		Aeropuerto aeroDestino = Aeropuerto.buscarAeropuerto(aeropuertoDestino);
-		if (aeroDestino == null) {
+		while (aeroDestino == null || aeroDestino == aeroOrigen) {
 			System.out.println("Debe ingresar un código válido:\n" + "BOG, CLO, MDE, MIA, PTY o ADZ.\n"
 					+ "Considere que debe ser diferente al anterior.");
-			System.out.println("el aeroDest es nulo");
-			return;
+			aeropuertoDestino = entradaTxt();
+			aeroDestino = Aeropuerto.buscarAeropuerto(aeropuertoDestino);
 		}
 
 		System.out.println("¿Cuál es el código del vuelo?");
@@ -116,10 +117,10 @@ public class counter {
 		String avionVuelo = entradaTxt();
 		// Búsqueda del avión
 		Avion avion = Avion.buscarAvion(avionVuelo);
-		if (avion == null) {
-			System.out.println("Debe ingresar una matrícula válida:\n" + "HK-2687, HK-7862 o HK-6546\n"
-					+ "Considere que debe ser diferente al anterior.");
-			return;
+		while (avion == null) {
+			System.out.println("Debe ingresar una matrícula válida:\n" + "HK-2687, HK-7862 o HK-6546");
+			avionVuelo = entradaTxt();
+			avion = Avion.buscarAvion(avionVuelo);
 		}
 
 		// Vuelo vuelo = Vuelo.nuevoVuelo(codigoVuelo, aeroOrigen, aeroDestino,
@@ -255,9 +256,6 @@ public class counter {
 			pasAux.setViajeroFrecuente(false);
 		}
 		
-		//pasAux.getCobro().costoInicial();
-		//pasAux.getCobro().descuento();
-		//pasAux.getCobro().multaEquipaje();
 		pasAux.getCobro().calcularCostos();
 		
 		System.out.println("¡Inscripción finalizada con éxito!");
@@ -280,16 +278,21 @@ public class counter {
 		System.out.println("Pulse 2 para ver la facturación del pasajero.");
 		System.out.println("Pulse 3 para salir al menú principal.");
 		opc = (int) entradaLong();
-		while (opc != 1 && opc != 2 && opc != 3) {
-			System.out.println("Pulse un número válido.");
-			opc = (int) entradaLong();
+		while (opc != 3) {
+			if (opc == 1) {
+				System.out.println(pasAux);
+				opc = (int) entradaLong();
+			}
+			else if (opc == 2) {
+				System.out.println(pasAux.getCobro());
+				opc = (int) entradaLong();
+			}
+			else {
+				System.out.println("Pulse un número válido.");
+				opc = (int) entradaLong();
+			}
 		}
-		if (opc == 1) {
-			System.out.println(pasAux);
-		}
-		else if (opc == 2) {
-			System.out.println(pasAux.getCobro());
-		}
+
 	}
 	// ====================================================================================================
 	

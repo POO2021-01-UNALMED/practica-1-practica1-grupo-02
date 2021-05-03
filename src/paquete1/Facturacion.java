@@ -45,26 +45,23 @@ public class Facturacion {
 				if (this.pasajero.getEquipaje().get(i).getTipo().equals("Mano")) {
 					if (this.pasajero.getClase().equals("Primera Clase")) {
 						int tope = this.pasajero.getEquipaje().get(i).getMasa() - 12;
-						multa = tope * 15;
+						multa += tope * 15;
 					}
 					else {
 						int tope = this.pasajero.getEquipaje().get(i).getMasa() - 10;
-						multa = tope * 12;
+						multa += tope * 12;
 					}
 				}
 				else if (this.pasajero.getEquipaje().get(i).getTipo().equals("Bodega")) {
 					if (this.pasajero.getClase().equals("Primera Clase")) {
 						int tope = this.pasajero.getEquipaje().get(i).getMasa() - 25;
-						multa = tope * 20;
+						multa += tope * 20;
 					}
 					else {
 						int tope = this.pasajero.getEquipaje().get(i).getMasa() - 20;
-						multa = tope * 18;
+						multa += tope * 18;
 					}
 				}
-			}
-			else {
-				multa = 0;
 			}
 			i ++;
 		}
@@ -97,8 +94,8 @@ public class Facturacion {
 			descuento = 0;
 		}
 		
-		this.descuento = descuento;
-		return descuento;
+		this.descuento = Math.round(descuento*10.0)/10.0;
+		return Math.round(descuento*10.0)/10.0;
 	}
 	
 	public double canjearMillas(float millas) {
@@ -122,7 +119,7 @@ public class Facturacion {
 			descMillaje = 0;
 		}
 		
-		return descMillaje;
+		return Math.round(descMillaje*10.0)/10.0;
 	}
 	
 	public double costoInicial() {
@@ -131,14 +128,14 @@ public class Facturacion {
 			double incremento = costo * 0.15;
 			costo = costo + incremento;
 		}
-		this.costoInicial = costo;
-		return costo;
+		this.costoInicial = Math.round(costo*10.0)/10.0;
+		return Math.round(costo*10.0)/10.0;
 	}
 	
 	public double calcularCostos() {
 		double total = this.costoInicial() + this.multaEquipaje() - this.descuento();
-		this.total = total;
-		return total;
+		this.total = Math.round(total*10.0)/10.0;
+		return Math.round(total*10.0)/10.0;
 	}
 	public String toString() {
 		if(this.multas) {
