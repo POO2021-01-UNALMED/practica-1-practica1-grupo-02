@@ -1,5 +1,6 @@
 package uiMain;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -29,7 +30,26 @@ public class counter {
 				25.793333F, -80.290556F);
 		Aeropuerto ciudadPanama = new Aeropuerto("PTY", "Aeropuerto Internacional de Tocumen", "Ciudad de Panamá",
 				"Panamá", 41, 9.071389F, -79.383611F);
-
+		Aeropuerto sidney = new Aeropuerto("SYD", "Aeropuerto Internacional Kingsford Smith", "Sídney",
+				"Australia", 9, -33.9460983F, 151.177002F);
+		Aeropuerto losAngeles = new Aeropuerto("LAX", "Aeropuerto Internacional de Los Ángeles", "Los Ángeles",
+				"Estados Unidos", 93, 34.0194F, -118.411F);
+		Aeropuerto newYork = new Aeropuerto("JFK", "Aeropuerto Internacional John F. Kennedy", "Nueva York",
+				"Estados Unidos", 10, 40.63333F, -73.783333F);
+		
+		// ==== VUELOS POR DEFECTO ====
+		
+		Vuelo vuelo1 = new Vuelo("101", medellin, bogota, "06/10/2021", avionUno);
+		Vuelo vuelo2 = new Vuelo("102", medellin, cali, "13/09/2021", avionUno);
+		Vuelo vuelo3 = new Vuelo("103", medellin, sanAndres, "24/03/2022", avionDos);
+		Vuelo vuelo4 = new Vuelo("201", medellin, miami, "24/07/2021", avionDos);
+		Vuelo vuelo5 = new Vuelo("301", medellin, sidney, "19/01/2022", avionTres);
+		
+		// ==== PASAJEROS POR DEFECTO ====
+		
+		Pasajero arnulfo = new Pasajero("Arnulfo Rodríguez", "10000", vuelo3, "18/10/1988", "Clase Turista", false);
+		Pasajero justin = new Pasajero("Justin del Socorro", "10001", vuelo4, "10/08/1995", "Primera Clase", true);
+		
 		Scanner entrada = new Scanner(System.in);
 		// !!!!!!!! Agregar constructor con el nombre del archivo aquí !!!!!!!!!!!
 		// TODO Agregar el constructor con la serialización del documento
@@ -39,13 +59,14 @@ public class counter {
 			System.out.println("¿Qué desea hacer?");
 			System.out.println("1. Registrar un nuevo vuelo.");
 			System.out.println("2. Registrar un empleado.");
-			System.out.println("3. Check-in de pasajero.");
-			System.out.println("4. Mostrar los vuelos programados.");
-			System.out.println("5. Mostrar la flota de POO Airways.");
-			System.out.println("6. Mostrar los empleados de la compañía.");
-			System.out.println("7. Cambiar el estado de un avión.");
-			System.out.println("8. Cambiar el estado de un aeropuerto.");
-			System.out.println("9. Terminar.");
+			System.out.println("3. Check-in de un pasajero ya registrado.");
+			System.out.println("4. Check-in de un pasajero nuevo.");
+			System.out.println("5. Mostrar los vuelos programados.");
+			System.out.println("6. Mostrar la flota de POO Airways.");
+			System.out.println("7. Mostrar los empleados de la compañía.");
+			System.out.println("8. Cambiar el estado de un avión.");
+			System.out.println("9. Cambiar el estado de un aeropuerto.");
+			System.out.println("0. Terminar.");
 			System.out.println("Teclee el número de la opción que desea ejecutar");
 
 			opcion = entrada.nextInt();
@@ -58,26 +79,29 @@ public class counter {
 				nuevoEmpleado();
 				break;
 			case 3:
-				checkIn();
+				checkIn1();
 				break;
 			case 4:
-				vuelosProgramados();
+				checkIn2();
 				break;
 			case 5:
-				flota();
+				vuelosProgramados();
 				break;
 			case 6:
-				empleados();
+				flota();
 				break;
 			case 7:
-				cambioEstadoAvion();
+				empleados();
 				break;
 			case 8:
+				cambioEstadoAvion();
+				break;
+			case 9:
 				cambioEstadoAeropuerto();
 				break;
 
 			}
-		} while (opcion != 9);
+		} while (opcion != 0);
 
 	}
 	
@@ -91,7 +115,7 @@ public class counter {
 		// Búsqueda del aeropuerto de origen
 		Aeropuerto aeroOrigen = Aeropuerto.buscarAeropuerto(aeropuertoOrigen);
 		while (aeroOrigen == null) {
-			System.out.println("Debe ingresar un código válido:\n" + "BOG, CLO, MDE, MIA, PTY o ADZ");
+			System.out.println("Debe ingresar un código válido:\n" + "BOG, CLO, MDE, MIA, LAX, JFK, SYD, PTY o ADZ");
 			aeropuertoOrigen = entradaTxt();
 			aeroOrigen = Aeropuerto.buscarAeropuerto(aeropuertoOrigen);
 		}
@@ -101,7 +125,7 @@ public class counter {
 		// Búsqueda del aeropuerto de destino
 		Aeropuerto aeroDestino = Aeropuerto.buscarAeropuerto(aeropuertoDestino);
 		while (aeroDestino == null || aeroDestino == aeroOrigen) {
-			System.out.println("Debe ingresar un código válido:\n" + "BOG, CLO, MDE, MIA, PTY o ADZ.\n"
+			System.out.println("Debe ingresar un código válido:\n" + "BOG, CLO, MDE, MIA, LAX, JFK, SYD, PTY o ADZ.\n"
 					+ "Considere que debe ser diferente al anterior.");
 			aeropuertoDestino = entradaTxt();
 			aeroDestino = Aeropuerto.buscarAeropuerto(aeropuertoDestino);
@@ -160,8 +184,127 @@ public class counter {
 	// ====================================================================================================
 	
 	// ====================================================================================================
-	// 3. Check-in de pasajero
-	static void checkIn() {
+	// 3. Check-in de pasajero ya registrado.
+	static void checkIn1() {
+		System.out.println("Por favor, ingrese el número del pasaporte del pasajero (5 dígitos).");
+		String passport = entradaTxt();
+		while (passport.length() != 5 || Pasajero.encontrarPasajero(passport) == null) {
+			System.out.println("El número ingresado no es válido o no se encuentra registrado.");
+			passport = entradaTxt();
+		}
+		Pasajero registrado = Pasajero.encontrarPasajero(passport);
+		System.out.println("El pasajero encontrado es "+registrado.getNombre());
+		System.out.println("\nIngrese el código del nuevo vuelo donde se le hará check-in.");
+		String codigoo = entradaTxt();
+		Vuelo nuevoVuelo;
+		while (Vuelo.getVuelo(codigoo) == null) {
+			System.out.println("Por favor, ingrese un código válido de vuelo (Ej. 101, 102, 103, 201, 301)");
+			codigoo = entradaTxt();
+		}
+		nuevoVuelo = Vuelo.getVuelo(codigoo);
+		registrado.setVuelo(nuevoVuelo);
+		System.out.println("¿En qué clase volará el pasajero? Teclee la opcion adecuada.");
+		String nuevaClase;
+		System.out.println("\n 1. Primera Clase.");
+		System.out.println(" 2. Clase Económica/Turista.");
+		int opcioon = (int) entradaLong();
+		
+		// Registro de la clase según la opción que corresponda
+		while (opcioon != 1 && opcioon != 2) {
+			System.out.println("Ingrese sólo 1 ó 2");
+			opcioon = (int) entradaLong();
+		}
+		if (opcioon == 1) {
+			nuevaClase = "Primera Clase";
+		}
+		else {
+			nuevaClase = "Clase Turista";
+		}
+		registrado.setClase(nuevaClase);
+		
+		// Equipaje
+		registrado.setEquipaje(new ArrayList<Equipaje>());
+		System.out.println("¿Cuántas maletas lleva el pasajero para guardar en bodega?");
+		int numeroMaletasB = (int) entradaLong();
+		int i = 0;
+		int x = i+1;
+		while (i < numeroMaletasB) {
+			System.out.println("Ingrese el peso de la maleta número "+x+" (En kg y números enteros)."+"\n"+
+								"-------------------------------------------------------------------"+"\n"+
+								"Nota: El peso máximo es de 25 kg para Primera Clase y de 20 kg para la Clase Turista "+"\n"+
+								"Se le cobrará multa por cada kg adicional.");
+			int pesoB = (int) entradaLong();
+			new Equipaje(registrado, "Bodega", pesoB);
+			i++;
+			x++;
+		}
+		System.out.println("¿Cuántas maletas de mano lleva?");
+		int numeroMaletasM = (int) entradaLong();
+		int j = 0;
+		int h = j+1;
+		while (j < numeroMaletasM) {
+			System.out.println("Ingrese el peso de la maleta número "+h+" (En kg y números enteros)."+"\n"+
+								"-------------------------------------------------------------------"+"\n"+
+								"Nota: El peso máximo es de 12 kg para Primera Clase y de 10 kg para la Clase Turista "+"\n"+
+								"	   Se le cobrará multa por cada kg adicional.");
+			int pesoM = (int) entradaLong();
+			new Equipaje(registrado, "Mano", pesoM);
+			j++;
+			h++;
+		}
+		if (registrado.getClase().equals("Primera Clase")) {
+			if (numeroMaletasM + numeroMaletasB > 4) {
+				System.out.println("Ha excedido el número máximo de maletas (4) para Primera Clase, \n"+
+									"se le cobrarán 35 USD por cada maleta adicional."+"\n"+
+									"-------------------------------------------------------------------");
+			}
+		}
+		else {
+			if (numeroMaletasM + numeroMaletasB > 3) {
+				System.out.println("Ha excedido el número máximo de maletas (3) para la Clase Turista, \n"+
+									"se le cobrarán 35 USD por cada maleta adicional."+"\n"+
+									"-------------------------------------------------------------------");
+			}
+		}
+		
+		// Finalización
+		registrado.getCobro().calcularCostos();
+		
+		System.out.println("¡Reinscripción finalizada con éxito! \n"
+						+ "----------------------------------");
+		System.out.println("Pulse 1 para ver el resumen de la inscripción.");
+		System.out.println("Pulse 2 para ver la facturación del pasajero.");
+		System.out.println("Pulse 3 para salir al menú principal. \n");
+		int opc = (int) entradaLong();
+		while (opc != 3) {
+			if (opc == 1) {
+				System.out.println(registrado);
+				System.out.println("------------------------------------------------");
+				System.out.println("Pulse 1 para ver el resumen de la inscripción.");
+				System.out.println("Pulse 2 para ver la facturación del pasajero.");
+				System.out.println("Pulse 3 para salir al menú principal. \n");
+				opc = (int) entradaLong();
+			}
+			else if (opc == 2) {
+				System.out.println(registrado.getCobro());
+				System.out.println("------------------------------------------------");
+				System.out.println("Pulse 1 para ver el resumen de la inscripción.");
+				System.out.println("Pulse 2 para ver la facturación del pasajero.");
+				System.out.println("Pulse 3 para salir al menú principal. \n");
+				opc = (int) entradaLong();
+			}
+			else {
+				System.out.println("Pulse un número válido.");
+				opc = (int) entradaLong();
+			}
+		}
+		
+	}
+	// ====================================================================================================
+	
+	// ====================================================================================================
+	// 4. Check-in de pasajero nuevo.
+	static void checkIn2() {
 		// Ingreso de la información necesaria
 		// TODO Lista de pasajeros como atributo de Pasajero para poder ir registrando a los pasajeros de la aerolínea
 		// y poder darles millas si vuelvan nuevamente con la aerolínea.
@@ -178,13 +321,13 @@ public class counter {
 		String codigo = entradaTxt();
 		Vuelo vuelo;
 		while (Vuelo.getVuelo(codigo) == null) {
-			System.out.println("Por favor, ingrese un código válido de vuelo");
+			System.out.println("Por favor, ingrese un código válido de vuelo (Ej. 101, 102, 103, 201, 301)");
 			codigo = entradaTxt();
 		}
 		vuelo = Vuelo.getVuelo(codigo);
 		System.out.println("¿Cuál es la fecha de nacimiento del pasajero? DD/MM/YYYY");
 		String cumpleanos = entradaTxt();
-		System.out.println("¿En qué clase vuelva el pasajero? Teclee la opcion adecuada.");
+		System.out.println("¿En qué clase volará el pasajero? Teclee la opcion adecuada.");
 		String clase;
 		System.out.println("\n 1. Primera Clase.");
 		System.out.println(" 2. Clase Económica/Turista.");
@@ -233,13 +376,15 @@ public class counter {
 		if (pasAux.getClase().equals("Primera Clase")) {
 			if (numeroMaletasM + numeroMaletasB > 4) {
 				System.out.println("Ha excedido el número máximo de maletas (4) para Primera Clase, \n"+
-									"se le cobrarán 35 USD por cada maleta adicional.");
+									"se le cobrarán 35 USD por cada maleta adicional."+"\n"+
+									"-------------------------------------------------------------------");
 			}
 		}
 		else {
 			if (numeroMaletasM + numeroMaletasB > 3) {
 				System.out.println("Ha excedido el número máximo de maletas (3) para la Clase Turista, \n"+
-									"se le cobrarán 35 USD por cada maleta adicional.");
+									"se le cobrarán 35 USD por cada maleta adicional."+"\n"+
+									"-------------------------------------------------------------------");
 			}
 		}
 		System.out.println("¿El pasajero es miembro del programa de viajero frecuente?");
@@ -258,33 +403,27 @@ public class counter {
 		
 		pasAux.getCobro().calcularCostos();
 		
-		System.out.println("¡Inscripción finalizada con éxito!");
+		System.out.println("¡Inscripción finalizada con éxito! \n"
+						+ "----------------------------------");
 		System.out.println("Pulse 1 para ver el resumen de la inscripción.");
 		System.out.println("Pulse 2 para ver la facturación del pasajero.");
-		System.out.println("Pulse 3 para salir al menú principal.");
+		System.out.println("Pulse 3 para salir al menú principal. \n");
 		int opc = (int) entradaLong();
-		while (opc != 1 && opc != 2 && opc != 3) {
-			System.out.println("Pulse un número válido.");
-			opc = (int) entradaLong();
-		}
-		if (opc == 1) {
-			System.out.println(pasAux);
-		}
-		else if (opc == 2) {
-			System.out.println(pasAux.getCobro());
-		}
-		
-		System.out.println("Pulse 1 para ver el resumen de la inscripción.");
-		System.out.println("Pulse 2 para ver la facturación del pasajero.");
-		System.out.println("Pulse 3 para salir al menú principal.");
-		opc = (int) entradaLong();
 		while (opc != 3) {
 			if (opc == 1) {
 				System.out.println(pasAux);
+				System.out.println("------------------------------------------------");
+				System.out.println("Pulse 1 para ver el resumen de la inscripción.");
+				System.out.println("Pulse 2 para ver la facturación del pasajero.");
+				System.out.println("Pulse 3 para salir al menú principal. \n");
 				opc = (int) entradaLong();
 			}
 			else if (opc == 2) {
 				System.out.println(pasAux.getCobro());
+				System.out.println("------------------------------------------------");
+				System.out.println("Pulse 1 para ver el resumen de la inscripción.");
+				System.out.println("Pulse 2 para ver la facturación del pasajero.");
+				System.out.println("Pulse 3 para salir al menú principal. \n");
 				opc = (int) entradaLong();
 			}
 			else {
@@ -297,7 +436,7 @@ public class counter {
 	// ====================================================================================================
 	
 	// ====================================================================================================
-	// 4. Mostrar los vuelos programados.
+	// 5. Mostrar los vuelos programados.
 	static void vuelosProgramados() {
 		System.out.println("Los vuelos programados en este momento son: ");
 		for (int i = 0; i < Vuelo.getVuelos().size(); i++) {
@@ -308,7 +447,7 @@ public class counter {
 	// ====================================================================================================
 	
 	// ====================================================================================================
-	// 5. Mostrar la flota de POO Airways.
+	// 6. Mostrar la flota de POO Airways.
 	static void flota() {
 		System.out.println("\n" + "La flota de POO Airways está conformada por: ");
 		for (int i = 0; i < Avion.getAviones().size(); i++) {
@@ -320,7 +459,7 @@ public class counter {
 	// ====================================================================================================
 	
 	// ====================================================================================================
-	// 6. Mostrar la flota de POO Airways.
+	// 7. Mostrar la flota de POO Airways.
 	static void empleados() {
 		System.out.println("\n" + "Los empleados de POO Airways son: ");
 		for (int i = 0; i < Empleado.getEmpleados().size(); i++) {
@@ -332,7 +471,7 @@ public class counter {
 	// ====================================================================================================
 	
 	// ====================================================================================================
-	// 7. Cambio de estado de un avión.
+	// 8. Cambio de estado de un avión.
 	static void cambioEstadoAvion() {
 		System.out.println("¿Al avión con qué matricula le desea cambiar el estado?");
 		System.out.println("1. HK-2687" + "\n2. HK-7862" + "\n3. HK-6546");
@@ -362,7 +501,7 @@ public class counter {
 	// ====================================================================================================
 	
 	// ====================================================================================================
-	// 8. Cambiar el estado de un aeropuerto
+	// 9. Cambiar el estado de un aeropuerto
 	static void cambioEstadoAeropuerto() {
 		System.out.println("¿Cuál es el código IATA del aeropuerto al cual le desea cambiar la disponibilidad?");
 		System.out.println(" 1. MDE\n 2. BOG\n 3. CLO\n 4. ADZ\n 5. MIA\n 6. PTY");
