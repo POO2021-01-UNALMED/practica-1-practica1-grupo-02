@@ -29,6 +29,7 @@ public class Facturacion {
 		this.costoInicial = this.costoInicial(pasajero.getVuelo().getLugarPartida(), pasajero.getVuelo().getDestino());
 		this.descuento = this.descuento();
 		this.total = this.calcularCostos();
+		this.pasajero.setCobro(this);
 	}
 	
 	// *************************************************************************************************
@@ -125,6 +126,10 @@ public class Facturacion {
 	
 	public double costoInicial(Aeropuerto origen, Aeropuerto destino) {
 		double costo = this.vuelo.distancia(origen, destino) * 0.24;
+		if (this.pasajero.getClase().equals("Primera Clase")) {
+			double incremento = costo * 0.15;
+			costo = costo + incremento;
+		}
 		return costo;
 	}
 	

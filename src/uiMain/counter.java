@@ -222,17 +222,40 @@ public class counter {
 			new Equipaje(pasAux, "Mano", pesoM);
 			i++;
 		}
-		System.out.println("¿El pasajero es miembro del programa de viajero frecuente?");
+		if (pasAux.getClase().equals("Primera Clase")) {
+			if (numeroMaletasM + numeroMaletasB > 4) {
+				System.out.println("Ha excedido el número máximo de maletas (4) para Primera Clase, \n"+
+									"se le cobrarán 35 USD por cada maleta adicional.");
+			}
+		}
+		else {
+			if (numeroMaletasM + numeroMaletasB > 3) {
+				System.out.println("Ha excedido el número máximo de maletas (3) para la Clase Turista, \n"+
+									"se le cobrarán 35 USD por cada maleta adicional.");
+			}
+		}
+		System.out.println("¿El pasajero es miembro del programa de viajero frecuente?"+"\n"+
+							"Reponda S o N");
 		String frecuente = entradaTxt();
-
-		boolean viajeroFrec = false;
-
-		// Viajero frecuente
-		if (frecuente.contains("s")) {
-			viajeroFrec = true;
+		if (frecuente.equals("S")) {
+			pasAux.setViajeroFrecuente(true);
+		}
+		System.out.println("¡Inscripción finalizada con éxito!");
+		System.out.println("Pulse 1 para ver el resumen de la inscripción.");
+		System.out.println("Pulse 2 para ver la facturación del pasajero.");
+		System.out.println("Pulse 3 para salir.");
+		int opc = (int) entradaLong();
+		while (opc != 1 && opc != 2 && opc != 3) {
+			System.out.println("Pulse un número válido.");
+			opc = (int) entradaLong();
+		}
+		if (opc == 1) {
+			System.out.println(pasAux);
+		}
+		else if (opc == 2) {
+			System.out.println(pasAux.getCobro());
 		}
 
-		// Creación de maletas
 	}
 	// ====================================================================================================
 	

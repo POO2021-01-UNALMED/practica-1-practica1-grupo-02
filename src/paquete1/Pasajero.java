@@ -12,7 +12,7 @@ public class Pasajero extends Persona {
 	private Facturacion cobro;
 	private float millas;
 	private boolean viajeroFrecuente;
-	static private ArrayList<Pasajero> pasajeros;
+	static private ArrayList<Pasajero> pasajeros = new ArrayList<Pasajero>();
 	
 	
 	// ===========================================================================================
@@ -25,6 +25,7 @@ public class Pasajero extends Persona {
 		this.equipaje = equipaje; //**
 		this.clase = clase;
 		this.cobro = cobro;
+		this.cobro.setPasajero(this);
 		this.viajeroFrecuente = viajeroFrecuente;
 		vuelo.pasajeros.add(this);
 		pasajeros.add(this);
@@ -41,6 +42,7 @@ public class Pasajero extends Persona {
 		vuelo.pasajeros.add(this);
 		pasajeros.add(this);
 		this.millaje();
+		this.cobro = new Facturacion(this, vuelo);
 	}
 
 
@@ -126,5 +128,11 @@ public class Pasajero extends Persona {
 		float distancia = this.getVuelo().distancia(this.getVuelo().getLugarPartida(), 
 				this.getVuelo().getDestino());  
 		this.millas += distancia/100;
+	}
+	
+	public String toString() {
+		return "El pasajero "+this.getNombre()+" ha sido inscrito al vuelo "+this.getVuelo().getCodigo()+"\n"+
+				"que parte desde "+this.getVuelo().getLugarPartida().getCiudad()+" con destino a la ciudad de "+this.getVuelo().getDestino().getCiudad()+"\n"+
+				"El vuelo partirá el día "+this.getVuelo().getFecha();
 	}
 }
