@@ -164,10 +164,15 @@ public class counter {
 	// 2. Registrar un nuevo empleado
 	static void nuevoEmpleado() {
 		// Ingreso de la información necesaria
+		
 		System.out.println("\n¿Cuál es el nombre completo del empleado");
 		String nombre = entradaTxt();
 		System.out.println("¿Cuál es el pasaporte del empleado?");
 		String pasaporte = entradaTxt();
+		while (pasaporte.length() != 5 || Empleado.encontrarEmpleado(pasaporte) == null ) {
+			System.out.println("Por favor, ingrese un número de pasaporte válido");
+			pasaporte = entradaTxt();
+		}
 		System.out.println("¿Cuál es el cargo del empleado?");
 		String cargo = entradaTxt();
 		System.out.println("¿Cuál es el horario del empleado?");

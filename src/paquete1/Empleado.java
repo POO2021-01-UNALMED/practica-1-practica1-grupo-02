@@ -81,6 +81,22 @@ public class Empleado extends Persona {
 	public String toString() {
 		return "- " + this.getNombre() + " se desempeña como " + this.getCargo() + " en el horario de " + this.getHorarioTrabajo() + ".";
 	} 
+	
+	public static Empleado encontrarEmpleado(String codigo) {
+		int i = 0;
+		Empleado encontrado = null;
+		while (i < empleados.size()) {
+			if (empleados.get(i).getPasaporte().equals(codigo)) {
+				encontrado = empleados.get(i);
+				break;
+			}
+			else {
+				encontrado = null;
+			}
+			i++;
+		}
+		return encontrado;
+	}
 
 
 
