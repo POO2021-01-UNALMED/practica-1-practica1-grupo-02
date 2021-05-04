@@ -98,20 +98,20 @@ public class Facturacion {
 		return Math.round(descuento*10.0)/10.0;
 	}
 	
-	public double canjearMillas(float millas) {
+	public double canjearMillas() {
 		this.canjeaMillas = true;
 		double descMillaje = 0;
-		if (millas >= 1000 && millas <= 50000 && this.pasajero.getMillas() >= millas) {
+		float millas = this.pasajero.getMillas();
+		if (millas >= 1000 && millas <= 50000) {
 			descMillaje = millas/100000;
 			descMillaje = descMillaje * 2;
 			double precio = this.costoInicial - this.descuento();
 			descMillaje = precio * descMillaje;
-			float millasActuales = this.pasajero.getMillas() - millas;
-			this.pasajero.setMillas(millasActuales);
+			this.pasajero.setMillas(0);
 		}
-		else if (millas > 50000 && this.pasajero.getMillas() >= millas) {
+		else if (millas > 50000) {
 			descMillaje = this.costoInicial - this.descuento();
-			float diferencia = this.pasajero.getMillas() - 50000;
+			float diferencia = millas - 50000;
 			this.pasajero.setMillas(diferencia);
 		}
 		else {
@@ -133,8 +133,15 @@ public class Facturacion {
 	}
 	
 	public double calcularCostos() {
-		double total = this.costoInicial() + this.multaEquipaje() - this.descuento();
-		this.total = Math.round(total*10.0)/10.0;
+		double total = 0;
+		if (this.canjeaMillas) {
+			total = this.costoInicial() + this.multaEquipaje() - this.descuento() - this.canjearMillas();
+			this.total = Math.round(total*10.0)/10.0;
+		}
+		else {
+			total = this.costoInicial() + this.multaEquipaje() - this.descuento();
+			this.total = Math.round(total*10.0)/10.0;
+		}
 		return Math.round(total*10.0)/10.0;
 	}
 	public String toString() {

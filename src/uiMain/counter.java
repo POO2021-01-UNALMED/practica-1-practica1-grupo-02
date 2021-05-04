@@ -267,6 +267,27 @@ public class counter {
 			}
 		}
 		
+		// Millas acumuladas
+		if (registrado.getMillas() >= 1000) {
+			System.out.println("El pasajero tiene "+registrado.getMillas()+" millas acumuladas. Recuerde que\n"+
+								"cada 1000 millas el pasajero obtiene un 2% de descuento sobre el costo del vuelo\n"+
+								"¿Desea canjear las millas o seguir acumulándolas para otro vuelo?\n");
+			System.out.println("Pulse 1 para canjear las millas acumuladas.");
+			System.out.println("Pulse 2 para seguir acumulando millas.");
+			System.out.println("------------------------------------------------------------------------------------");
+			int eleccion = (int) entradaLong();
+			while (eleccion != 1 && eleccion != 2) {
+				System.out.println("Pulse un número válido.");
+				eleccion = (int) entradaLong();
+			}
+			if (eleccion == 1) {
+				System.out.println(registrado.getMillas()+" se aplicarán al descuento.\n"+
+									"Si la cifra es mayor a 50000 el vuelo será gratis y el sobrante se acumula.");
+				registrado.getCobro().canjearMillas();
+				System.out.println("El descuento aplicado por millas será de "+registrado.getCobro().canjearMillas()+" USD.\n");
+			}
+		}
+		
 		// Finalización
 		registrado.getCobro().calcularCostos();
 		
