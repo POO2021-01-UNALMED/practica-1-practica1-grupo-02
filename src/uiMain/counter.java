@@ -1,5 +1,5 @@
 package uiMain;
-
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
@@ -184,6 +184,25 @@ public class counter {
 				+ " y pasaporte " + empleado.getPasaporte() + ",\n" + "siendo su cargo el de " + empleado.getCargo()
 				+ " y con horario " + empleado.getHorarioTrabajo() + ".");
 		System.out.println("\n");
+		
+		// serializacion empleados -> No se si esta bien :)
+		
+		try {
+			ObjectOutputStream serializandoEmp = new ObjectOutputStream(new FileOutputStream("https://github.com/POO2021-01-UNALMED/practica-1-practica1-grupo-02.git/Empleados.dat"));
+			serializandoEmp.writeObject(empleado);
+			serializandoEmp.close();
+			ObjectInputStream deserializandoEmp = new ObjectInputStream(new FileInputStream("https://github.com/POO2021-01-UNALMED/practica-1-practica1-grupo-02.git/Empleados.dat"));
+			Empleado [] empleadosRecuperado = (Empleado[]) deserializandoEmp.readObject();
+			deserializandoEmp.close();
+			for(Empleado e : empleadosRecuperado) {
+				System.out.println(e);
+			}
+		} catch(Exception e) {
+			
+		}
+		
+		
+		
 
 	}
 	// ====================================================================================================
