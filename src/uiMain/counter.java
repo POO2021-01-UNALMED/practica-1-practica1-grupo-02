@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
 
+import baseDatos.Deserializador;
 import baseDatos.Serializador;
 import gestion.*;
 import paquete1.*;
@@ -13,6 +14,7 @@ public class counter {
 
 	public static void main(String[] args) {
 
+		Avion avi =new Avion();
 		// ==== FLOTA DE LA COMPAÑÍA ===
 		Avion avionUno = new Avion("HK-2687", "Airbus A320neo", 153, 8, 41000);
 		Avion avionDos = new Avion("HK-7862", "Airbus A320neo", 153, 8, 41000);
@@ -104,7 +106,10 @@ public class counter {
 			case 9:
 				cambioEstadoAeropuerto();
 				break;
-
+			case 10:
+				System.out.println("funciona");
+				Deserializador.deserializar(avi);
+				break;
 			}
 		} while (opcion != 0);
 

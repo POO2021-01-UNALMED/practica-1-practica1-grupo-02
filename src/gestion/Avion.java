@@ -1,6 +1,9 @@
 package gestion;
 
 import java.util.Vector;
+
+import baseDatos.Deserializador;
+
 import java.io.Serializable;
 import java.util.Iterator;
 
@@ -15,7 +18,10 @@ public class Avion implements Serializable {
 	private boolean disponibilidad;
 	private int masa;
 	private static Vector<Avion> aviones = new Vector<Avion>();
-
+	
+	public Avion () {
+		Deserializador.deserializar(this);
+	}
 	// ================================================================================
 	// CONSTRUCTOR
 	public Avion(String matricula, String modelo, int capacidad, int tripulacion, int masa) {

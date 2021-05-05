@@ -1,6 +1,8 @@
 package gestion;
 
 import java.util.Vector;
+
+import baseDatos.Deserializador;
 import paquete1.Pasajero;
 import paquete1.Empleado;
 
@@ -18,6 +20,7 @@ public class Vuelo {
 	private float costoGasolina;
 	static Vector<Vuelo> vuelos = new Vector<Vuelo>();
 	private float distancia;
+
 	
 	// ================================================================================
 	// CONSTRUCTOR
