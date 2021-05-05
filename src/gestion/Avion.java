@@ -1,9 +1,10 @@
 package gestion;
 
 import java.util.Vector;
+import java.io.Serializable;
 import java.util.Iterator;
 
-public class Avion {
+public class Avion implements Serializable {
 	// ================================================================================
 	// ATRIBUTOS
 	private String matricula;

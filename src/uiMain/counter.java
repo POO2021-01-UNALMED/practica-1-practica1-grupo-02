@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
 
+import baseDatos.Serializador;
 import gestion.*;
 import paquete1.*;
 
@@ -16,7 +17,11 @@ public class counter {
 		Avion avionUno = new Avion("HK-2687", "Airbus A320neo", 153, 8, 41000);
 		Avion avionDos = new Avion("HK-7862", "Airbus A320neo", 153, 8, 41000);
 		Avion avionTres = new Avion("HK-6546", "Airbus A320neo", 153, 8, 41000);
-
+		
+		Serializador.serializar(avionUno);
+		Serializador.serializar(avionDos);
+		Serializador.serializar(avionTres);
+		
 		// ==== DESTINO DE LA COMPAÑÍA ====
 		Aeropuerto medellin = new Aeropuerto("MDE", "Aeropuerto Internacional José María Córdova", "Medellín",
 				"Colombia", 2142, 6.167222F, -75.426667F);
