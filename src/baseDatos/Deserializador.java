@@ -6,7 +6,8 @@ import gestion.*;
 import paquete1.*;
 
 public class Deserializador {
-	private static File rutatemp = new File("src\\baseDatos\\temp\\avion.txt");
+	private static String ruta = System.getProperty("user.dir")+"\\src\\baseDatos\\temp\\";
+	private static File rutatemp = new File(ruta + "aeropuerto.txt");
 	
 	public static void deserializar() {
 		
@@ -26,7 +27,7 @@ public class Deserializador {
 					System.out.println(e);
 				}
 			}catch(Exception e) {
-				System.out.println("no lee el archivo");
+				System.out.println(e);
 			}
 			
 			// --- Forma numero 2
