@@ -1,12 +1,14 @@
 package gestion;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import baseDatos.Deserializador;
+import baseDatos.Serializador;
 import paquete1.Pasajero;
 import paquete1.Empleado;
 
-public class Vuelo {
+public class Vuelo implements Serializable{
 	// ================================================================================
 	// ATRIBUTOS
 	private String codigo;
@@ -36,6 +38,8 @@ public class Vuelo {
 		vuelos.add(this);
 		this.distancia = distancia(origen, destino);
 		this.setCostoGasolina(this.distancia);
+		Serializador.serializar(this);
+
 	}
 	
 	// ================================================================================

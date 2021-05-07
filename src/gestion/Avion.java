@@ -3,6 +3,7 @@ package gestion;
 import java.util.Vector;
 
 import baseDatos.Deserializador;
+import baseDatos.Serializador;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -31,6 +32,7 @@ public class Avion implements Serializable {
 		this.numeroTripulacion = tripulacion;
 		this.masa = masa;
 		Avion.aviones.add(this);
+		Serializador.serializar(this);
 	}
 
 	// ================================================================================

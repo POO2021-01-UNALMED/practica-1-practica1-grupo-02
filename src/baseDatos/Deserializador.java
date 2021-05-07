@@ -6,16 +6,34 @@ import gestion.Vuelo;
 import paquete1.*;
 
 public class Deserializador {
+	private static File rutatemp = new File("C:\\Users\\vladis\\OneDrive\\Documentos\\GitHub\\practica-1-practica1-grupo-02\\src\\baseDatos\\temp\\avion.txt");
+	
 	
 	public static void deserializar(Avion avion) {
-		try{
-			ObjectInputStream recuperar_fichero= new ObjectInputStream(new FileInputStream("C:\\Users\\vladis\\OneDrive\\Documentos\\GitHub\\practica-1-practica1-grupo-02\\src\\baseDatos\\temp\\avion.txt"));
-			Avion [] avionRecuperado = (Avion[]) recuperar_fichero.readObject();
-			recuperar_fichero.close();
-			for(Avion e : avionRecuperado) {
-				System.out.println(e);
-			}
-		} catch(Exception e) {
+		//File[] docs = rutatemp.listFiles();
+		FileInputStream fis;
+		ObjectInputStream ois;
+		        
+			try {
+				fis= new FileInputStream(rutatemp);
+				ois = new ObjectInputStream(fis);
+				Avion [] avionRecuperado = (Avion[]) ois.readObject();
+				ois.close();
+				for(Avion e : avionRecuperado) {
+					System.out.println(e);
+				}
+				
+				/*
+ObjectInputStream recuperar_fichero= new ObjectInputStream(new FileInputStream("C:\\Users\\vladis\\OneDrive\\Documentos\\GitHub\\practica-1-practica1-grupo-02\\src\\baseDatos\\temp\\avion.txt" ));
+				 *  Avion [] avionRecuperado = (Avion[]) recuperar_fichero.readObject();
+				 * recuperar_fichero.close();
+				 * 	for(Avion e : avionRecuperado) {
+					System.out.println(e);
+					}
+				 */
+
+			} catch (Exception e) {
+				System.out.println("no se esta capturando");
 			
 		}
 	}

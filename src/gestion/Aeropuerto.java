@@ -1,8 +1,11 @@
 package gestion;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Aeropuerto {
+import baseDatos.Serializador;
+
+public class Aeropuerto implements Serializable {
 	private String codigo;
 	private String nombre;
 	private String ciudad;
@@ -26,7 +29,7 @@ public class Aeropuerto {
 		this.lon = lon;
 		this.estado = true;
 		Aeropuerto.aeropuertos.add(this);
-		
+		Serializador.serializar(this);
 	}
 
 	// Getters and setters  
