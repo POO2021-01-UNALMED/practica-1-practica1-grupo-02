@@ -8,7 +8,6 @@ import paquete1.*;
 public class Deserializador {
 	private static File rutatemp = new File("src\\baseDatos\\temp\\avion.txt");
 	
-	
 	public static void deserializar() {
 		
 		//File[] docs = rutatemp.listFiles();
@@ -42,8 +41,8 @@ ObjectInputStream recuperar_fichero= new ObjectInputStream(new FileInputStream("
 	}catch(Exception e) {
 		System.out.println("no lee el archivo");
 	}
-*/
-		
+
+		*/
 				
 			
 		}
