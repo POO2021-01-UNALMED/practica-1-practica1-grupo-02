@@ -32,7 +32,7 @@ public class Avion implements Serializable {
 		this.numeroTripulacion = tripulacion;
 		this.masa = masa;
 		Avion.aviones.add(this);
-		Serializador.serializar(this);
+		//Serializador.serializar(this);
 	}
 
 	// ================================================================================

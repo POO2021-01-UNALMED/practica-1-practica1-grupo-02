@@ -1,5 +1,6 @@
 package baseDatos;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
@@ -8,7 +9,8 @@ import paquete1.Empleado;
 import paquete1.Pasajero;
 
 public class Serializador {
-	
+	private static String ruta = System.getProperty("user.dir")+"\\src\\baseDatos\\temp\\";
+	private static File rutatemp = new File(ruta + "avion.txt");
 	
 	public static void serializar(Avion avion) {
 		try{
@@ -24,7 +26,7 @@ public class Serializador {
 	
 	public static void serializar(Aeropuerto aeropuerto) {
 		try{
-			ObjectOutputStream fichero= new ObjectOutputStream(new FileOutputStream("src\\baseDatos\\temp\\aeropuerto.txt"));
+			ObjectOutputStream fichero= new ObjectOutputStream(new FileOutputStream(rutatemp));
 			fichero.writeObject(aeropuerto);
 			fichero.close();
 			

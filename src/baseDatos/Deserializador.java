@@ -7,7 +7,7 @@ import paquete1.*;
 
 public class Deserializador {
 	private static String ruta = System.getProperty("user.dir")+"\\src\\baseDatos\\temp\\";
-	private static File rutatemp = new File(ruta + "aeropuerto.txt");
+	private static File rutatemp = new File(ruta + "avion.txt");
 	
 	public static void deserializar() {
 		
@@ -21,9 +21,10 @@ public class Deserializador {
 			try {
 				fis= new FileInputStream(rutatemp);
 				ois = new ObjectInputStream(fis);
-				Aeropuerto [] avionRecuperado = (Aeropuerto[]) ois.readObject();
+				System.out.println(ois.readObject().getClass().getName());
+				Avion [] avionRecuperado = (Avion[]) ois.readObject();
 				ois.close();
-				for(Aeropuerto e : avionRecuperado) {
+				for(Avion e : avionRecuperado) {
 					System.out.println(e);
 				}
 			}catch(Exception e) {
