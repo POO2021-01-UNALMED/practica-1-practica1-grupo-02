@@ -1,44 +1,55 @@
 package baseDatos;
 import java.io.*;
 
-import gestion.Avion;
-import gestion.Vuelo;
+import gestion.*;
+
 import paquete1.*;
 
 public class Deserializador {
-	private static File rutatemp = new File("C:\\Users\\vladis\\OneDrive\\Documentos\\GitHub\\practica-1-practica1-grupo-02\\src\\baseDatos\\temp\\avion.txt");
+	private static File rutatemp = new File("src\\baseDatos\\temp\\avion.txt");
 	
 	
-	public static void deserializar(Avion avion) {
+	public static void deserializar() {
+		
 		//File[] docs = rutatemp.listFiles();
+		
+		// --- Forma numero 1
+		
 		FileInputStream fis;
 		ObjectInputStream ois;
 		        
 			try {
 				fis= new FileInputStream(rutatemp);
 				ois = new ObjectInputStream(fis);
-				Avion [] avionRecuperado = (Avion[]) ois.readObject();
+				Aeropuerto [] avionRecuperado = (Aeropuerto[]) ois.readObject();
 				ois.close();
-				for(Avion e : avionRecuperado) {
+				for(Aeropuerto e : avionRecuperado) {
 					System.out.println(e);
 				}
-				
-				/*
-ObjectInputStream recuperar_fichero= new ObjectInputStream(new FileInputStream("C:\\Users\\vladis\\OneDrive\\Documentos\\GitHub\\practica-1-practica1-grupo-02\\src\\baseDatos\\temp\\avion.txt" ));
-				 *  Avion [] avionRecuperado = (Avion[]) recuperar_fichero.readObject();
-				 * recuperar_fichero.close();
-				 * 	for(Avion e : avionRecuperado) {
+			}catch(Exception e) {
+				System.out.println("no lee el archivo");
+			}
+			
+			// --- Forma numero 2
+		/*
+				try {
+ObjectInputStream recuperar_fichero= new ObjectInputStream(new FileInputStream("src\\baseDatos\\temp\\avion.txt" ));
+				  Avion [] avionRecuperado = (Avion[]) recuperar_fichero.readObject();
+				  recuperar_fichero.close();
+				 	for(Avion e : avionRecuperado) {
 					System.out.println(e);
 					}
-				 */
-
-			} catch (Exception e) {
-				System.out.println("no se esta capturando");
+	}catch(Exception e) {
+		System.out.println("no lee el archivo");
+	}
+*/
+		
+				
 			
 		}
-	}
-
 	
+
+	/*
 	public static void deserializar(Empleado empleado) {
 		try{
 			ObjectInputStream recuperar_fichero= new ObjectInputStream(new FileInputStream("C:\\Users\\vladis\\OneDrive\\Documentos\\GitHub\\practica-1-practica1-grupo-02\\src\\baseDatos\\temp\\empleados.txt"));
@@ -64,5 +75,5 @@ ObjectInputStream recuperar_fichero= new ObjectInputStream(new FileInputStream("
 			
 		}
 	}
-
+*/
 }

@@ -14,7 +14,7 @@ public class counter {
 
 	public static void main(String[] args) {
 
-		Avion avi =new Avion();
+		//Avion avi =new Avion();
 		// ==== FLOTA DE LA COMPAÑÍA ===
 		Avion avionUno = new Avion("HK-2687", "Airbus A320neo", 153, 8, 41000);
 		Avion avionDos = new Avion("HK-7862", "Airbus A320neo", 153, 8, 41000);
@@ -105,7 +105,7 @@ public class counter {
 				break;
 			case 10:
 				System.out.println("funciona");
-				Deserializador.deserializar(avi);
+				Deserializador.deserializar();
 				break;
 			}
 		} while (opcion != 0);

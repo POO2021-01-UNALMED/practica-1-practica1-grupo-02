@@ -21,7 +21,7 @@ public class Avion implements Serializable {
 	private static Vector<Avion> aviones = new Vector<Avion>();
 	
 	public Avion () {
-		Deserializador.deserializar(this);
+	//	Deserializador.deserializar(this);
 	}
 	// ================================================================================
 	// CONSTRUCTOR

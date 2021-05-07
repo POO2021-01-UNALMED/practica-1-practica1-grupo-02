@@ -12,7 +12,7 @@ public class Serializador {
 	
 	public static void serializar(Avion avion) {
 		try{
-			ObjectOutputStream fichero= new ObjectOutputStream(new FileOutputStream("C:\\Users\\vladis\\OneDrive\\Documentos\\GitHub\\practica-1-practica1-grupo-02\\src\\baseDatos\\temp\\avion.txt"));
+			ObjectOutputStream fichero= new ObjectOutputStream(new FileOutputStream("src\\baseDatos\\temp\\avion.txt"));
 			fichero.writeObject(avion);
 			fichero.close();
 			
@@ -24,7 +24,7 @@ public class Serializador {
 	
 	public static void serializar(Aeropuerto aeropuerto) {
 		try{
-			ObjectOutputStream fichero= new ObjectOutputStream(new FileOutputStream("C:\\Users\\vladis\\OneDrive\\Documentos\\GitHub\\practica-1-practica1-grupo-02\\src\\baseDatos\\temp\\aeropuerto.txt"));
+			ObjectOutputStream fichero= new ObjectOutputStream(new FileOutputStream("src\\baseDatos\\temp\\aeropuerto.txt"));
 			fichero.writeObject(aeropuerto);
 			fichero.close();
 			
@@ -36,7 +36,7 @@ public class Serializador {
 	
 	public static void serializar(Vuelo vuelo) {
 		try{
-			ObjectOutputStream fichero= new ObjectOutputStream(new FileOutputStream("C:\\Users\\vladis\\OneDrive\\Documentos\\GitHub\\practica-1-practica1-grupo-02\\src\\baseDatos\\temp\\vuelo.txt"));
+			ObjectOutputStream fichero= new ObjectOutputStream(new FileOutputStream("src\\baseDatos\\temp\\vuelo.txt"));
 			fichero.writeObject(vuelo);
 			fichero.close();
 			
