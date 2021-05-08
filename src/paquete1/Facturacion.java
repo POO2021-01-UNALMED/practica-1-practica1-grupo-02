@@ -1,8 +1,10 @@
 package paquete1;
 
+import java.io.Serializable;
+
 import gestion.*;
 
-public class Facturacion {
+public class Facturacion implements Serializable{
 	private double total = 0;
 	private double descuento = 0;
 	private double costoInicial = 0;

@@ -38,7 +38,6 @@ public class Vuelo implements Serializable{
 		vuelos.add(this);
 		this.distancia = distancia(origen, destino);
 		this.setCostoGasolina(this.distancia);
-		Serializador.serializar(this);
 
 	}
 	

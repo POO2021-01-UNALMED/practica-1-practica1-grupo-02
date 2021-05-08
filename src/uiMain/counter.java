@@ -19,10 +19,12 @@ public class counter {
 		Avion avionUno = new Avion("HK-2687", "Airbus A320neo", 153, 8, 41000);
 		Avion avionDos = new Avion("HK-7862", "Airbus A320neo", 153, 8, 41000);
 		Avion avionTres = new Avion("HK-6546", "Airbus A320neo", 153, 8, 41000);
-		Serializador.serializar(avionUno);
-		Serializador.serializar(avionDos);
-		Serializador.serializar(avionTres);
-
+		//Avion[] aviones = new Avion[3];
+		//aviones[0] = avionUno;
+		//aviones[1] = avionDos;
+		//aviones[2] = avionTres;
+		//Serializador.serializarAviones(aviones);
+		
 		// ==== DESTINO DE LA COMPAÑÍA ====
 		Aeropuerto medellin = new Aeropuerto("MDE", "Aeropuerto Internacional José María Córdova", "Medellín",
 				"Colombia", 2142, 6.167222F, -75.426667F);
@@ -59,6 +61,8 @@ public class counter {
 		Scanner entrada = new Scanner(System.in);
 		// !!!!!!!! Agregar constructor con el nombre del archivo aquí !!!!!!!!!!!
 		// TODO Agregar el constructor con la serialización del documento
+		
+		
 		int opcion;
 		do {
 			System.out.println("¡Bievenido a POO Airways!");
@@ -106,8 +110,14 @@ public class counter {
 				cambioEstadoAeropuerto();
 				break;
 			case 10:
-				System.out.println("funciona");
-				Deserializador.deserializar();
+				
+				Serializador.serializarAeropuertos(Aeropuerto.getAeropuertos());
+				Serializador.serializarAviones(Avion.getAviones());
+				Serializador.serializarVuelo(Vuelo.getVuelos());
+				
+				Deserializador.deserializarAviones();
+				Deserializador.deserializarAeropuertos();
+				Deserializador.deserializarVuelos();
 				break;
 			}
 		} while (opcion != 0);

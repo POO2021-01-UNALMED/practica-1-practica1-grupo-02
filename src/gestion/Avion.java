@@ -20,9 +20,7 @@ public class Avion implements Serializable {
 	private int masa;
 	private static Vector<Avion> aviones = new Vector<Avion>();
 	
-	public Avion () {
-	//	Deserializador.deserializar(this);
-	}
+
 	// ================================================================================
 	// CONSTRUCTOR
 	public Avion(String matricula, String modelo, int capacidad, int tripulacion, int masa) {
@@ -32,7 +30,7 @@ public class Avion implements Serializable {
 		this.numeroTripulacion = tripulacion;
 		this.masa = masa;
 		Avion.aviones.add(this);
-		//Serializador.serializar(this);
+		
 	}
 
 	// ================================================================================

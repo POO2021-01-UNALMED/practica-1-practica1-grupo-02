@@ -1,8 +1,10 @@
 package paquete1;
 
+import java.io.Serializable;
+
 import gestion.Vuelo;
 
-public class Persona {
+public class Persona implements Serializable{
 
 	private String nombre;
 	private Vuelo vuelo;

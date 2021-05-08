@@ -1,5 +1,6 @@
 package baseDatos;
 import java.io.*;
+import java.util.Vector;
 
 import gestion.*;
 
@@ -7,56 +8,40 @@ import paquete1.*;
 
 public class Deserializador {
 	private static String ruta = System.getProperty("user.dir")+"\\src\\baseDatos\\temp\\";
-	private static File rutatemp = new File(ruta + "avion.txt");
+	private static File rutaAviones = new File(ruta + "avion.txt");
 	
-	public static void deserializar() {
-		
-		//File[] docs = rutatemp.listFiles();
-		
-		// --- Forma numero 1
+	
+	public static void deserializarAviones() {
 		
 		FileInputStream fis;
-		ObjectInputStream ois;
-		        
+		ObjectInputStream ois;	        
 			try {
-				fis= new FileInputStream(rutatemp);
+				fis= new FileInputStream(rutaAviones);
 				ois = new ObjectInputStream(fis);
-				System.out.println(ois.readObject().getClass().getName());
-				Avion [] avionRecuperado = (Avion[]) ois.readObject();
+				Vector<Avion> aviones = (Vector<Avion>) ois.readObject();
 				ois.close();
-				for(Avion e : avionRecuperado) {
+				for(Avion e : aviones) {
 					System.out.println(e);
 				}
+				
 			}catch(Exception e) {
 				System.out.println(e);
-			}
-			
-			// --- Forma numero 2
-		/*
-				try {
-ObjectInputStream recuperar_fichero= new ObjectInputStream(new FileInputStream("src\\baseDatos\\temp\\avion.txt" ));
-				  Avion [] avionRecuperado = (Avion[]) recuperar_fichero.readObject();
-				  recuperar_fichero.close();
-				 	for(Avion e : avionRecuperado) {
-					System.out.println(e);
-					}
-	}catch(Exception e) {
-		System.out.println("no lee el archivo");
-	}
-
-		*/
-				
-			
+			}		
 		}
 	
 
-	/*
-	public static void deserializar(Empleado empleado) {
-		try{
-			ObjectInputStream recuperar_fichero= new ObjectInputStream(new FileInputStream("C:\\Users\\vladis\\OneDrive\\Documentos\\GitHub\\practica-1-practica1-grupo-02\\src\\baseDatos\\temp\\empleados.txt"));
-			Empleado [] empleadosRecuperado = (Empleado[]) recuperar_fichero.readObject();
-			recuperar_fichero.close();
-			for(Empleado e : empleadosRecuperado) {
+	
+	private static File rutaAeropuerto = new File(ruta + "aeropuerto.txt");
+	
+	public static void deserializarAeropuertos() {
+		FileInputStream fis;
+		ObjectInputStream ois;
+		try {
+			fis= new FileInputStream(rutaAeropuerto);
+			ois = new ObjectInputStream(fis);
+			Vector<Aeropuerto> aeropuertos = (Vector<Aeropuerto>) ois.readObject();
+			ois.close();
+			for(Aeropuerto e : aeropuertos) {
 				System.out.println(e);
 			}
 		} catch(Exception e) {
@@ -64,17 +49,21 @@ ObjectInputStream recuperar_fichero= new ObjectInputStream(new FileInputStream("
 		}
 	}
 	
-	public static void deserializar(Pasajero pasajero) {
+	private static File rutaVuelo = new File(ruta + "vuelo.txt");
+	public static void deserializarVuelos() {
+		FileInputStream fis;
+		ObjectInputStream ois;
 		try{
-			ObjectInputStream recuperar_fichero= new ObjectInputStream(new FileInputStream("C:\\Users\\vladis\\OneDrive\\Documentos\\GitHub\\practica-1-practica1-grupo-02\\src\\baseDatos\\temp\\pasajeros.txt"));
-			Pasajero [] pasajerosRecuperado = (Pasajero[]) recuperar_fichero.readObject();
-			recuperar_fichero.close();
-			for(Pasajero e : pasajerosRecuperado) {
+			fis= new FileInputStream(rutaVuelo);
+			ois = new ObjectInputStream(fis);
+			Vector<Vuelo> vuelos = (Vector<Vuelo>) ois.readObject();
+			ois.close();
+			for(Vuelo e : vuelos) {
 				System.out.println(e);
 			}
 		} catch(Exception e) {
-			
+			System.out.println(e);
 		}
 	}
-*/
+
 }

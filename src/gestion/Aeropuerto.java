@@ -29,7 +29,6 @@ public class Aeropuerto implements Serializable {
 		this.lon = lon;
 		this.estado = true;
 		Aeropuerto.aeropuertos.add(this);
-		Serializador.serializar(this);
 	}
 
 	// Getters and setters  
@@ -126,6 +125,11 @@ public class Aeropuerto implements Serializable {
 		return null;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "El Aeropuerto con código " + codigo + ", llamado " + nombre + ", ubicado en el país " + pais + " en la ciudad " + ciudad  
+				+ ". ubicado a un altura de " + altura + " latitud de " + lat + " y longitud de " + lon + ", con un estado " + estado 
+				;
+	}
 	
 }
