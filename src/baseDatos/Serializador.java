@@ -19,7 +19,6 @@ public class Serializador {
 			fichero.close();
 			
 		}catch(Exception e) {
-			System.out.println("peepe");
 		}
 		
 	}
