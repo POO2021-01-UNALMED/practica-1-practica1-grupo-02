@@ -14,17 +14,12 @@ public class counter {
 
 	public static void main(String[] args) {
 
-		//Avion avi =new Avion();
+
 		// ==== FLOTA DE LA COMPAÑÍA ===
 		Avion avionUno = new Avion("HK-2687", "Airbus A320neo", 153, 8, 41000);
 		Avion avionDos = new Avion("HK-7862", "Airbus A320neo", 153, 8, 41000);
 		Avion avionTres = new Avion("HK-6546", "Airbus A320neo", 153, 8, 41000);
-		//Avion[] aviones = new Avion[3];
-		//aviones[0] = avionUno;
-		//aviones[1] = avionDos;
-		//aviones[2] = avionTres;
-		//Serializador.serializarAviones(aviones);
-		
+
 		// ==== DESTINO DE LA COMPAÑÍA ====
 		Aeropuerto medellin = new Aeropuerto("MDE", "Aeropuerto Internacional José María Córdova", "Medellín",
 				"Colombia", 2142, 6.167222F, -75.426667F);
@@ -52,15 +47,20 @@ public class counter {
 		Vuelo vuelo3 = new Vuelo("103", medellin, sanAndres, "24/03/2022", avionDos);
 		Vuelo vuelo4 = new Vuelo("201", medellin, miami, "24/07/2021", avionDos);
 		Vuelo vuelo5 = new Vuelo("301", medellin, sidney, "19/01/2022", avionTres);
-		
+
 		// ==== PASAJEROS POR DEFECTO ====
-		
+	
 		Pasajero arnulfo = new Pasajero("Arnulfo Rodríguez", "10000", vuelo3, "18/10/1988", "Clase Turista", false);
 		Pasajero justin = new Pasajero("Justin del Socorro", "10001", vuelo4, "10/08/1995", "Primera Clase", true);
 		
+		// ==== EMPLEADOS POR DEFECTO ====
+		
+		Empleado jefe = new Empleado("Rodolfo Gold", vuelo3 , "12344", "Jefe", "lunes-viernes", true);
+		Empleado azafata1 = new Empleado("Rosario Gray", vuelo3 , "12355", "Azafata", "lunes-sabado", true);
+		Empleado azafata2 = new Empleado("Mulata Price", vuelo4 , "12366", "Azafata", "lunes-sabado", true);
+		
 		Scanner entrada = new Scanner(System.in);
-		// !!!!!!!! Agregar constructor con el nombre del archivo aquí !!!!!!!!!!!
-		// TODO Agregar el constructor con la serialización del documento
+
 		
 		
 		int opcion;
@@ -76,6 +76,7 @@ public class counter {
 			System.out.println("7. Mostrar los empleados de la compañía.");
 			System.out.println("8. Cambiar el estado de un avión.");
 			System.out.println("9. Cambiar el estado de un aeropuerto.");
+			System.out.println("10. Serializar y Deserializar");
 			System.out.println("0. Terminar.");
 			System.out.println("Teclee el número de la opción que desea ejecutar");
 
@@ -109,15 +110,15 @@ public class counter {
 			case 9:
 				cambioEstadoAeropuerto();
 				break;
-			case 10:
-				
+			case 0:
 				Serializador.serializarAeropuertos(Aeropuerto.getAeropuertos());
 				Serializador.serializarAviones(Avion.getAviones());
 				Serializador.serializarVuelo(Vuelo.getVuelos());
+				Serializador.serializarEmpleado(Empleado.getEmpleados());
+				break;
+			case 10:			
 				
-				Deserializador.deserializarAviones();
-				Deserializador.deserializarAeropuertos();
-				Deserializador.deserializarVuelos();
+				SerializaryDeserializar();
 				break;
 			}
 		} while (opcion != 0);
@@ -169,7 +170,8 @@ public class counter {
 		// Vuelo vuelo = Vuelo.nuevoVuelo(codigoVuelo, aeroOrigen, aeroDestino,
 		// fechaVuelo, avion);
 		Vuelo vuelo = Vuelo.nuevoVuelo(codigoVuelo, aeroOrigen, aeroDestino, fechaVuelo, avion);
-		Vuelo.getVuelos().add(vuelo);
+		//Vuelo.getVuelos().add(vuelo);***
+		
 		System.out.println("¡Muy bien! Se ha registro el vuelo " + codigoVuelo + " que parte de "
 				+ aeroOrigen.getCiudad() + "\ncon destino a " + aeroDestino.getCiudad() + ", con fecha "
 				+ vuelo.getFecha() + "\ny que será operado por POO Airways en el avión con matrícula "
@@ -186,12 +188,19 @@ public class counter {
 		
 		System.out.println("\n¿Cuál es el nombre completo del empleado");
 		String nombre = entradaTxt();
-		System.out.println("¿Cuál es el pasaporte del empleado?");
+		System.out.println("¿Cuál es el pasaporte del empleado? (5 dígitos)");
 		String pasaporte = entradaTxt();
-		while (pasaporte.length() != 5 || Empleado.encontrarEmpleado(pasaporte) == null ) {
-			System.out.println("Por favor, ingrese un número de pasaporte válido");
+		
+		
+		System.out.println(pasaporte.length());
+		
+		while ( pasaporte.length() != 5 ||Empleado.encontrarEmpleado(pasaporte) != null ) {
+			System.out.println("El código del pasaporte ya se encuentra registrado o es invalido");
 			pasaporte = entradaTxt();
-		}
+
+		}		
+		
+		
 		System.out.println("¿Cuál es el cargo del empleado?");
 		String cargo = entradaTxt();
 		System.out.println("¿Cuál es el horario del empleado?");
@@ -203,27 +212,13 @@ public class counter {
 				+ " y pasaporte " + empleado.getPasaporte() + ",\n" + "siendo su cargo el de " + empleado.getCargo()
 				+ " y con horario " + empleado.getHorarioTrabajo() + ".");
 		System.out.println("\n");
-		
-		// serializacion empleados -> No se si esta bien :)
-		
-		try {
-			ObjectOutputStream serializandoEmp = new ObjectOutputStream(new FileOutputStream("https://github.com/POO2021-01-UNALMED/practica-1-practica1-grupo-02.git/Empleados.dat"));
-			serializandoEmp.writeObject(empleado);
-			serializandoEmp.close();
-			ObjectInputStream deserializandoEmp = new ObjectInputStream(new FileInputStream("https://github.com/POO2021-01-UNALMED/practica-1-practica1-grupo-02.git/Empleados.dat"));
-			Empleado [] empleadosRecuperado = (Empleado[]) deserializandoEmp.readObject();
-			deserializandoEmp.close();
-			for(Empleado e : empleadosRecuperado) {
-				System.out.println(e);
-			}
-		} catch(Exception e) {
-			
+	
 		}
 		
 		
 		
 
-	}
+	
 	// ====================================================================================================
 	
 	// ====================================================================================================
@@ -550,13 +545,14 @@ public class counter {
 		System.out.println(" 1. Disponible" + "\n 2. No disponible");
 		int opcion2 = (int) entradaLong();
 		switch (opcion2 ) {
-		case 1: avion.setDisponibilidad(true);
+		case 1: avion.setDisponibilidad(true); break;
 		case 2: 
 			avion.setDisponibilidad(false);
 			for(int i = 0; i < avion.getVuelos().size(); i++) {
 				System.out.println("Canges por cancelación para los pasajeros del vuelo " + avion.getVuelos().get(i).getCodigo());
 				avion.getVuelos().get(i).disponibilidad();
 			}
+			break;
 		}
 		System.out.println("\n");
 		
@@ -583,13 +579,14 @@ public class counter {
 		System.out.println(" 1. Disponible" + "\n 2. No disponible");
 		int opcion2 = (int) entradaLong();
 		switch (opcion2 ) {
-		case 1: aeropuerto.setEstado(true);
+		case 1: aeropuerto.setEstado(true); break;
 		case 2: 
 			aeropuerto.setEstado(false);
 			for(int i = 0; i < aeropuerto.getVuelos().size(); i++) {
 				System.out.println("Canges por cancelación para los pasajeros del vuelo " + aeropuerto.getVuelos().get(i).getCodigo());
 				aeropuerto.getVuelos().get(i).disponibilidad();
 			}
+			break;
 		}
 		
 	}
@@ -597,6 +594,21 @@ public class counter {
 	// ====================================================================================================
 	
 	// ====================================================================================================
+	static void SerializaryDeserializar() {
+		Serializador.serializarAeropuertos(Aeropuerto.getAeropuertos());
+		Serializador.serializarAviones(Avion.getAviones());
+		Serializador.serializarVuelo(Vuelo.getVuelos());
+		Serializador.serializarEmpleado(Empleado.getEmpleados());
+		
+		Deserializador.deserializarAviones();
+		Deserializador.deserializarAeropuertos();
+		Deserializador.deserializarVuelos();
+		Deserializador.deserializarEmpleados();
+	}
+	
+	
+	
+	
 	static String entradaTxt() {
 		return entrada.nextLine();
 	}
