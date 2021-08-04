@@ -11,7 +11,7 @@ public class Facturacion implements Serializable{
 	private Pasajero pasajero;
 	private Vuelo vuelo;
 	private boolean multas = false;
-	private boolean canjeaMillas = false;
+	private boolean canjeaMillas = true;
 
 	
 	// *************************************************************************************************
@@ -105,10 +105,10 @@ public class Facturacion implements Serializable{
 		double descMillaje = 0;
 		float millas = this.pasajero.getMillas();
 		if (millas >= 1000 && millas <= 50000) {
-			descMillaje = millas/100000;
+			descMillaje = millas/1000;
 			descMillaje = descMillaje * 2;
 			double precio = this.costoInicial - this.descuento();
-			descMillaje = precio * descMillaje;
+			descMillaje = (precio * descMillaje)/100;
 			this.pasajero.setMillas(0);
 		}
 		else if (millas > 50000) {

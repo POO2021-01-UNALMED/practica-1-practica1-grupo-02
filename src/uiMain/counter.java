@@ -11,7 +11,6 @@ import paquete1.*;
 
 public class counter {
 	static Scanner entrada = new Scanner(System.in);
-
 	public static void main(String[] args) {
 
 
@@ -52,6 +51,7 @@ public class counter {
 	
 		Pasajero arnulfo = new Pasajero("Arnulfo Rodríguez", "10000", vuelo3, "18/10/1988", "Clase Turista", false);
 		Pasajero justin = new Pasajero("Justin del Socorro", "10001", vuelo4, "10/08/1995", "Primera Clase", true);
+		justin.setMillas(2400);
 		
 		// ==== EMPLEADOS POR DEFECTO ====
 		
@@ -167,17 +167,17 @@ public class counter {
 			avion = Avion.buscarAvion(avionVuelo);
 		}
 
-		// Vuelo vuelo = Vuelo.nuevoVuelo(codigoVuelo, aeroOrigen, aeroDestino,
-		// fechaVuelo, avion);
 		Vuelo vuelo = Vuelo.nuevoVuelo(codigoVuelo, aeroOrigen, aeroDestino, fechaVuelo, avion);
-		//Vuelo.getVuelos().add(vuelo);***
+		vuelo.disponibilidad();
+		if (vuelo.isEstado()) {
 		
-		System.out.println("¡Muy bien! Se ha registro el vuelo " + codigoVuelo + " que parte de "
-				+ aeroOrigen.getCiudad() + "\ncon destino a " + aeroDestino.getCiudad() + ", con fecha "
-				+ vuelo.getFecha() + "\ny que será operado por POO Airways en el avión con matrícula "
-				+ avion.getMatricula());
-		System.out.println("El costo de gasolina es de: " +  vuelo.getCostoGasolina() + " USD, con una distancia de: " + vuelo.getDistancia() + " millas.");
-		System.out.println("\n");
+			System.out.println("¡Muy bien! Se ha registro el vuelo " + codigoVuelo + " que parte de "
+					+ aeroOrigen.getCiudad() + "\ncon destino a " + aeroDestino.getCiudad() + ", con fecha "
+					+ vuelo.getFecha() + "\ny que será operado por POO Airways en el avión con matrícula "
+					+ avion.getMatricula());
+			System.out.println("El costo de gasolina es de: " +  vuelo.getCostoGasolina() + " USD, con una distancia de: " + vuelo.getDistancia() + " millas.");
+			System.out.println("\n");
+		}
 	}
 	// ====================================================================================================
 	
@@ -241,6 +241,7 @@ public class counter {
 		}
 		nuevoVuelo = Vuelo.getVuelo(codigoo);
 		registrado.setVuelo(nuevoVuelo);
+		//Facturacion factura = new Facturacion(registrado, nuevoVuelo);
 		System.out.println("¿En qué clase volará el pasajero? Teclee la opcion adecuada.");
 		String nuevaClase;
 		System.out.println("\n 1. Primera Clase.");
@@ -307,13 +308,15 @@ public class counter {
 		
 		// Millas acumuladas
 		if (registrado.getMillas() >= 1000) {
-			System.out.println("El pasajero tiene "+registrado.getMillas()+" millas acumuladas. Recuerde que\n"+
-								"cada 1000 millas el pasajero obtiene un 2% de descuento sobre el costo del vuelo\n"+
+			System.out.println("El pasajero tiene "+registrado.getMillas()+" millas acumuladas. Recuerde que, por\n"+
+								"cada 1000 millas, el pasajero obtiene un 2% de descuento sobre el costo del vuelo\n"+
 								"¿Desea canjear las millas o seguir acumulándolas para otro vuelo?\n");
 			System.out.println("Pulse 1 para canjear las millas acumuladas.");
 			System.out.println("Pulse 2 para seguir acumulando millas.");
 			System.out.println("------------------------------------------------------------------------------------");
 			int eleccion = (int) entradaLong();
+			registrado.getCobro().costoInicial();
+			registrado.getCobro().calcularCostos();
 			while (eleccion != 1 && eleccion != 2) {
 				System.out.println("Pulse un número válido.");
 				eleccion = (int) entradaLong();

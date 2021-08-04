@@ -56,7 +56,7 @@ public class Vuelo implements Serializable{
 			estado = true;
 		}
 		
-		// Bonificacion a los pasajeros por afectacion
+		// Bonificacion a los pasajeros por afectación
 		if (estado) {
 			System.out.println("¡Enhorabuena! El vuelo está programado y en orden\n" +
 								"¡Alas y buen viento!");
