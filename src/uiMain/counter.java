@@ -153,6 +153,10 @@ public class counter {
 
 		System.out.println("¿Cuál es el código del vuelo?");
 		String codigoVuelo = entradaTxt();
+		while (Vuelo.getVuelo(codigoVuelo) != null) {
+			System.out.println("Este código ya se encuentra registrado.");
+			codigoVuelo = entradaTxt();
+		}
 
 		System.out.println("¿Cuándo sale el vuelo? DD/MM/YYYY");
 		String fechaVuelo = entradaTxt();
