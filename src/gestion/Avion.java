@@ -100,7 +100,7 @@ public class Avion implements Serializable {
 		this.masa = masa;
 	}
 
-	// Metodos auxiliares
+	// Metodos auxiliares -------------- 
 	static public Avion buscarAvion(String matricula) {
 		Iterator<Avion> iteradorAvion = aviones.iterator();
 		while(iteradorAvion.hasNext()) {
