@@ -16,7 +16,7 @@ public class Avion implements Serializable {
 	private String modelo;
 	private int capacidad;
 	private int numeroTripulacion;
-	private boolean disponibilidad;
+	private boolean disponibilidad = true;
 	private int masa;
 	private static Vector<Avion> aviones = new Vector<Avion>();
 	

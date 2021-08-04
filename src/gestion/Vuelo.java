@@ -18,7 +18,7 @@ public class Vuelo implements Serializable{
 	public Vector<Pasajero> pasajeros = new Vector<>();
 	private Avion avion;
 	private Vector<Empleado> tripulacion = new Vector<>();
-	private boolean estado;
+	private boolean estado = true;
 	private float costoGasolina;
 	static Vector<Vuelo> vuelos = new Vector<Vuelo>();
 	private float distancia;
