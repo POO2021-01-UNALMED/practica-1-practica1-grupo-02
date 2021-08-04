@@ -66,11 +66,11 @@ public class Vuelo implements Serializable{
 			System.out.println("Lo sentimos, pero el vuelo ha sido cancelado\n" + 
 								"Todos los pasajeros recibirán millas en compensación");
 			for (Pasajero pasajero : pasajeros) {
-				if (pasajero.getClase().equals("A")) {
+				if (pasajero.getClase().equals("Primera Clase")) {
 					pasajero.setMillas(pasajero.getMillas() + 350);
 					System.out.println("El pasajero " + pasajero.getNombre() + " ha recibido 350 millas.");
 				}
-				else if (pasajero.getClase().equals("B")) {
+				else if (pasajero.getClase().equals("Clase Turista")) {
 					pasajero.setMillas(pasajero.getMillas() + 100);
 					System.out.println("El pasajero " + pasajero.getNombre() + " ha recibido 100 millas.");
 				}
