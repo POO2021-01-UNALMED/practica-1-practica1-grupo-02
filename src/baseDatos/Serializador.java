@@ -47,6 +47,17 @@ public class Serializador {
 		}
 		
 	}
+	public static void serializarEmpleado(Vector<Empleado> vector) {
+		try{
+			ObjectOutputStream fichero= new ObjectOutputStream(new FileOutputStream("src\\baseDatos\\temp\\empleado.txt"));
+			fichero.writeObject(vector);
+			fichero.close();
+			
+		}catch(Exception e) {
+			
+		}
+		
+	}
 
 	
 }

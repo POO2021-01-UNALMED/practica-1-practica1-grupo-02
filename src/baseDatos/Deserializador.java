@@ -65,5 +65,25 @@ public class Deserializador {
 			System.out.println(e);
 		}
 	}
+	
+	
+	
+	
+	private static File rutaEmpleado = new File(ruta + "empleado.txt");
+	public static void deserializarEmpleados() {
+		FileInputStream fis;
+		ObjectInputStream ois;
+		try{
+			fis= new FileInputStream(rutaEmpleado);
+			ois = new ObjectInputStream(fis);
+			Vector<Empleado> empleados = (Vector<Empleado>) ois.readObject();
+			ois.close();
+			for(Empleado e : empleados) {
+				System.out.println(e);
+			}
+		} catch(Exception e) {
+			System.out.println(e);
+		}
+	}
 
 }
