@@ -1,19 +1,21 @@
-package paquete1;
+package gestion;
 
 import java.util.Vector;
 
 import gestion.Vuelo;
 
 public class Empleado extends Persona {
-
+	
+	// ================================================================================
+	// ATRIBUTOS
 	private String cargo;
 	private String horarioTrabajo;
 	private boolean disponibilidad;
 	private static Vector<Empleado> empleados = new Vector<Empleado>();
 
+	
 	// =======================================================================
 	// CONSTRUCTOR
-	
 	public Empleado(String nombre, Vuelo vuelo, String pasaporte, String cargo, String horarioTrabajo,
 			boolean disponibilidad) {
 		super(nombre, vuelo, pasaporte);
@@ -24,8 +26,8 @@ public class Empleado extends Persona {
 	}
 	
 
-
-	// Constructor auxiliar para la creacion de nuevos objetos de la clase Empleado	
+	// =======================================================================
+	// CONSTRUCTOR AUXILIAR
 	public Empleado(String nombre, String pasaporte, String cargo, String horarioTrabajo) {
 		super(nombre, pasaporte);
 		this.cargo = cargo;
@@ -34,9 +36,10 @@ public class Empleado extends Persona {
 		empleados.add(this);
 	}
 	
+	
+	
 	// ======================================================================
 	// GETTERS Y SETTERS
-	
 	public String getCargo() {
 		return cargo;
 	}
@@ -70,8 +73,9 @@ public class Empleado extends Persona {
 	}
 
 
+	
 	// ==================================
-	// METODO AUXILIAR
+	// METODOS AUXILIAR
 	
 	public static Empleado nuevoEmpleado(String nombre, String pasaporte, String cargo, String horario) {
 		Empleado empleado = new Empleado(nombre, pasaporte, cargo, horario);

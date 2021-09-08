@@ -4,7 +4,7 @@ import java.util.Vector;
 
 import gestion.*;
 
-import paquete1.*;
+
 
 public class Deserializador {
 	private static String ruta = System.getProperty("user.dir")+"\\src\\baseDatos\\temp\\";
@@ -65,9 +65,6 @@ public class Deserializador {
 			System.out.println(e);
 		}
 	}
-	
-	
-	
 	
 	private static File rutaEmpleado = new File(ruta + "empleado.txt");
 	public static void deserializarEmpleados() {

@@ -1,4 +1,4 @@
-package paquete1;
+package gestion;
 
 import java.io.Serializable;
 
@@ -6,15 +6,16 @@ import gestion.Vuelo;
 
 public class Persona implements Serializable{
 
+	// ================================================================================
+	// ATRIBUTOS
 	private String nombre;
 	private Vuelo vuelo;
 	private String pasaporte;
 	
 	
 	
-	// =========================================================================================
-	// Constructor
-
+	// ===========================================================================================
+	// CONSTRUCTOR
 	public Persona(String nombre, Vuelo vuelo, String pasaporte) {
 		super();
 		this.nombre = nombre;
@@ -23,16 +24,20 @@ public class Persona implements Serializable{
 	}
 	
 	
-	// Constructor auxiliar para la creacion de nuevos objetos Pasajero y Empleado
+	
+	// ================================================================================
+	// CONSTRUCTOR AUXILIAR
 	public Persona(String nombre, String pasaporte) {
 		super();
 		this.nombre = nombre;
 		this.pasaporte = pasaporte;
 	}
 
+	
+	
+	
 	// ================================================================================
 	// GETTERS Y SETTERS
-	
 	public String getNombre() {
 		return nombre;
 	}
@@ -56,8 +61,5 @@ public class Persona implements Serializable{
 	
 
 	
-	
-	// =========================================================================================
-	// Metodos
-	
+
 }

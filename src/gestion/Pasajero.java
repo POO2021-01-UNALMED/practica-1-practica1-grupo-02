@@ -1,11 +1,12 @@
-package paquete1;
+package gestion;
 
 import java.util.ArrayList;
 import gestion.Vuelo;
 
 public class Pasajero extends Persona {
 	
-
+	// ================================================================================
+	// ATRIBUTOS
 	private String cumpleaños;
 	private ArrayList<Equipaje> equipaje = new ArrayList<Equipaje>();
 	private String clase;
@@ -17,7 +18,6 @@ public class Pasajero extends Persona {
 	
 	// ===========================================================================================
 	// CONSTRUCTOR
-	
 	public Pasajero(String nombre, Vuelo vuelo, String pasaporte, String cumpleaños, ArrayList<Equipaje> equipaje,
 			String clase, Facturacion cobro, boolean viajeroFrecuente) {
 		super(nombre, vuelo, pasaporte);
@@ -32,7 +32,9 @@ public class Pasajero extends Persona {
 		this.millaje();
 	}
 	
-	// Constructor auxiliar para la creacion de nuevos objetos de la clase Pasajero
+	
+	// ================================================================================
+	// CONSTRUCTOR AUXILIAR
 	public Pasajero(String nombre, String pasaporte, Vuelo vuelo, String cumpleaños, String clase, boolean viajeroFrecuente) {
 		super(nombre, pasaporte);
 		this.cumpleaños = cumpleaños;
@@ -99,8 +101,10 @@ public class Pasajero extends Persona {
 		this.equipaje = equipaje;
 	}
 
+	
+	
 	// ======================================================================
-	// Métodos auxiliares
+	// METODOS
 	static public Pasajero nuevoPasajero(String nombre, String pasaporte, Vuelo vuelo, String cumpleanos, String clase, boolean frecuente) {
 		Pasajero pasajero = new Pasajero(nombre, pasaporte, vuelo, cumpleanos, clase, frecuente);
 		return pasajero;
@@ -122,8 +126,7 @@ public class Pasajero extends Persona {
 		return encontrado;
 	}
 		
-	// ==================================
-	// METODOS
+	//CALCULA LA MILLAS ENTRE LOS AEROPUERTOS
 	public void millaje() {
 		float distancia = this.getVuelo().distancia(this.getVuelo().getLugarPartida(), 
 				this.getVuelo().getDestino());  

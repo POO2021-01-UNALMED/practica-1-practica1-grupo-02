@@ -7,57 +7,12 @@ import java.util.Vector;
 import baseDatos.Deserializador;
 import baseDatos.Serializador;
 import gestion.*;
-import paquete1.*;
+
 
 public class counter {
 	static Scanner entrada = new Scanner(System.in);
+
 	public static void main(String[] args) {
-
-
-		// ==== FLOTA DE LA COMPAÑÍA ===
-		Avion avionUno = new Avion("HK-2687", "Airbus A320neo", 153, 8, 41000);
-		Avion avionDos = new Avion("HK-7862", "Airbus A320neo", 153, 8, 41000);
-		Avion avionTres = new Avion("HK-6546", "Airbus A320neo", 153, 8, 41000);
-
-		// ==== DESTINO DE LA COMPAÑÍA ====
-		Aeropuerto medellin = new Aeropuerto("MDE", "Aeropuerto Internacional José María Córdova", "Medellín",
-				"Colombia", 2142, 6.167222F, -75.426667F);
-		Aeropuerto bogota = new Aeropuerto("BOG", "Aeropuerto Internacional Eldorado", "Bogotá", "Colombia", 2648,
-				4.701389F, -74.146944F);
-		Aeropuerto cali = new Aeropuerto("CLO", "Aeropuerto Internacional Alfonso Bonilla Aragón", "Cali", "Colombia",
-				962, 3.543056F, -76.381389F);
-		Aeropuerto sanAndres = new Aeropuerto("ADZ", "Aeropuerto Internacional Gustavo Rojas Pinilla", "San Andrés",
-				"Colombia", 6, 12.583611F, -81.711111F);
-		Aeropuerto miami = new Aeropuerto("MIA", "Aeropuerto Internacional de Miami", "Miami", "Estados Unidos", 2,
-				25.793333F, -80.290556F);
-		Aeropuerto ciudadPanama = new Aeropuerto("PTY", "Aeropuerto Internacional de Tocumen", "Ciudad de Panamá",
-				"Panamá", 41, 9.071389F, -79.383611F);
-		Aeropuerto sidney = new Aeropuerto("SYD", "Aeropuerto Internacional Kingsford Smith", "Sídney",
-				"Australia", 9, -33.9460983F, 151.177002F);
-		Aeropuerto losAngeles = new Aeropuerto("LAX", "Aeropuerto Internacional de Los Ángeles", "Los Ángeles",
-				"Estados Unidos", 93, 34.0194F, -118.411F);
-		Aeropuerto newYork = new Aeropuerto("JFK", "Aeropuerto Internacional John F. Kennedy", "Nueva York",
-				"Estados Unidos", 10, 40.63333F, -73.783333F);
-		
-		// ==== VUELOS POR DEFECTO ====
-		
-		Vuelo vuelo1 = new Vuelo("101", medellin, bogota, "06/10/2021", avionUno);
-		Vuelo vuelo2 = new Vuelo("102", medellin, cali, "13/09/2021", avionUno);
-		Vuelo vuelo3 = new Vuelo("103", medellin, sanAndres, "24/03/2022", avionDos);
-		Vuelo vuelo4 = new Vuelo("201", medellin, miami, "24/07/2021", avionDos);
-		Vuelo vuelo5 = new Vuelo("301", medellin, sidney, "19/01/2022", avionTres);
-
-		// ==== PASAJEROS POR DEFECTO ====
-	
-		Pasajero arnulfo = new Pasajero("Arnulfo Rodríguez", "10000", vuelo3, "18/10/1988", "Clase Turista", false);
-		Pasajero justin = new Pasajero("Justin del Socorro", "10001", vuelo4, "10/08/1995", "Primera Clase", true);
-		justin.setMillas(2400);
-		
-		// ==== EMPLEADOS POR DEFECTO ====
-		
-		Empleado jefe = new Empleado("Rodolfo Gold", vuelo3 , "12344", "Jefe", "lunes-viernes", true);
-		Empleado azafata1 = new Empleado("Rosario Gray", vuelo3 , "12355", "Azafata", "lunes-sabado", true);
-		Empleado azafata2 = new Empleado("Mulata Price", vuelo4 , "12366", "Azafata", "lunes-sabado", true);
 		
 		Scanner entrada = new Scanner(System.in);
 
@@ -153,10 +108,6 @@ public class counter {
 
 		System.out.println("¿Cuál es el código del vuelo?");
 		String codigoVuelo = entradaTxt();
-		while (Vuelo.getVuelo(codigoVuelo) != null) {
-			System.out.println("Este código ya se encuentra registrado.");
-			codigoVuelo = entradaTxt();
-		}
 
 		System.out.println("¿Cuándo sale el vuelo? DD/MM/YYYY");
 		String fechaVuelo = entradaTxt();
@@ -171,17 +122,17 @@ public class counter {
 			avion = Avion.buscarAvion(avionVuelo);
 		}
 
+		// Vuelo vuelo = Vuelo.nuevoVuelo(codigoVuelo, aeroOrigen, aeroDestino,
+		// fechaVuelo, avion);
 		Vuelo vuelo = Vuelo.nuevoVuelo(codigoVuelo, aeroOrigen, aeroDestino, fechaVuelo, avion);
-		vuelo.disponibilidad();
-		if (vuelo.isEstado()) {
+		//Vuelo.getVuelos().add(vuelo);***
 		
-			System.out.println("¡Muy bien! Se ha registro el vuelo " + codigoVuelo + " que parte de "
-					+ aeroOrigen.getCiudad() + "\ncon destino a " + aeroDestino.getCiudad() + ", con fecha "
-					+ vuelo.getFecha() + "\ny que será operado por POO Airways en el avión con matrícula "
-					+ avion.getMatricula());
-			System.out.println("El costo de gasolina es de: " +  vuelo.getCostoGasolina() + " USD, con una distancia de: " + vuelo.getDistancia() + " millas.");
-			System.out.println("\n");
-		}
+		System.out.println("¡Muy bien! Se ha registro el vuelo " + codigoVuelo + " que parte de "
+				+ aeroOrigen.getCiudad() + "\ncon destino a " + aeroDestino.getCiudad() + ", con fecha "
+				+ vuelo.getFecha() + "\ny que será operado por POO Airways en el avión con matrícula "
+				+ avion.getMatricula());
+		System.out.println("El costo de gasolina es de: " +  vuelo.getCostoGasolina() + " USD, con una distancia de: " + vuelo.getDistancia() + " millas.");
+		System.out.println("\n");
 	}
 	// ====================================================================================================
 	
@@ -245,7 +196,6 @@ public class counter {
 		}
 		nuevoVuelo = Vuelo.getVuelo(codigoo);
 		registrado.setVuelo(nuevoVuelo);
-		//Facturacion factura = new Facturacion(registrado, nuevoVuelo);
 		System.out.println("¿En qué clase volará el pasajero? Teclee la opcion adecuada.");
 		String nuevaClase;
 		System.out.println("\n 1. Primera Clase.");
@@ -312,15 +262,13 @@ public class counter {
 		
 		// Millas acumuladas
 		if (registrado.getMillas() >= 1000) {
-			System.out.println("El pasajero tiene "+registrado.getMillas()+" millas acumuladas. Recuerde que, por\n"+
-								"cada 1000 millas, el pasajero obtiene un 2% de descuento sobre el costo del vuelo\n"+
+			System.out.println("El pasajero tiene "+registrado.getMillas()+" millas acumuladas. Recuerde que\n"+
+								"cada 1000 millas el pasajero obtiene un 2% de descuento sobre el costo del vuelo\n"+
 								"¿Desea canjear las millas o seguir acumulándolas para otro vuelo?\n");
 			System.out.println("Pulse 1 para canjear las millas acumuladas.");
 			System.out.println("Pulse 2 para seguir acumulando millas.");
 			System.out.println("------------------------------------------------------------------------------------");
 			int eleccion = (int) entradaLong();
-			registrado.getCobro().costoInicial();
-			registrado.getCobro().calcularCostos();
 			while (eleccion != 1 && eleccion != 2) {
 				System.out.println("Pulse un número válido.");
 				eleccion = (int) entradaLong();
@@ -372,7 +320,7 @@ public class counter {
 	// 4. Check-in de pasajero nuevo.
 	static void checkIn2() {
 		// Ingreso de la información necesaria
-		// Lista de pasajeros como atributo de Pasajero para poder ir registrando a los pasajeros de la aerolínea
+		// TODO Lista de pasajeros como atributo de Pasajero para poder ir registrando a los pasajeros de la aerolínea
 		// y poder darles millas si vuelvan nuevamente con la aerolínea.
 		System.out.println("\n¿Cuál es el nombre completo del pasajero?");
 		String nombre = entradaTxt();

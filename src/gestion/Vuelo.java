@@ -5,10 +5,10 @@ import java.util.Vector;
 
 import baseDatos.Deserializador;
 import baseDatos.Serializador;
-import paquete1.Pasajero;
-import paquete1.Empleado;
+
 
 public class Vuelo implements Serializable{
+	
 	// ================================================================================
 	// ATRIBUTOS
 	private String codigo;
@@ -18,7 +18,7 @@ public class Vuelo implements Serializable{
 	public Vector<Pasajero> pasajeros = new Vector<>();
 	private Avion avion;
 	private Vector<Empleado> tripulacion = new Vector<>();
-	private boolean estado = true;
+	private boolean estado;
 	private float costoGasolina;
 	static Vector<Vuelo> vuelos = new Vector<Vuelo>();
 	private float distancia;
@@ -41,57 +41,7 @@ public class Vuelo implements Serializable{
 
 	}
 	
-	// ================================================================================
-	// METODOS
-	public void disponibilidad() {
-		// Obtener estados de disponibilidad
-		// TODO Cambiar de void a String
-		estado = false;
-		boolean aircraft = this.avion.isDisponibilidad();
-		boolean origen = this.lugarPartida.isEstado();
-		boolean destino = this.destino.isEstado();
-		
-		// Modificar estado del vuelo
-		if (origen && destino && aircraft) {
-			estado = true;
-		}
-		
-		// Bonificacion a los pasajeros por afectación
-		if (estado) {
-			System.out.println("¡Enhorabuena! El vuelo está programado y en orden\n" +
-								"¡Alas y buen viento!");
-		}
-		
-		else {
-			System.out.println("Lo sentimos, pero el vuelo ha sido cancelado\n" + 
-								"Todos los pasajeros recibirán millas en compensación");
-			for (Pasajero pasajero : pasajeros) {
-				if (pasajero.getClase().equals("Primera Clase")) {
-					pasajero.setMillas(pasajero.getMillas() + 350);
-					System.out.println("El pasajero " + pasajero.getNombre() + " ha recibido 350 millas.");
-				}
-				else if (pasajero.getClase().equals("Clase Turista")) {
-					pasajero.setMillas(pasajero.getMillas() + 100);
-					System.out.println("El pasajero " + pasajero.getNombre() + " ha recibido 100 millas.");
-				}
-			}
-		}
-	}
 
-	public float distancia(Aeropuerto origen, Aeropuerto destino) {
-		// Valores basicos <- estan dados en radianes
-		float latDest = (float) (origen.getLat() / (180/Math.PI));;
-		float lonDest = (float) (origen.getLon() / (180/Math.PI));;
-		float latOrig = (float) (destino.getLat() / (180/Math.PI));;
-		float lonOrig = (float) (destino.getLon() / (180/Math.PI));;
-
-		// Se usa la ecuacion de Haversine
-		float distance = (float) (Math.sin(latDest) * Math.sin(latOrig));
-		distance += Math.cos(latDest) * Math.cos(latOrig) * Math.cos(lonDest - lonOrig);
-		distance = (float) Math.acos(distance);
-		distance = 3963 * distance;
-		return distance;
-	}
 	
 	// ================================================================================
 	// GETTERS Y SETTERS
@@ -197,7 +147,61 @@ public class Vuelo implements Serializable{
 		Vuelo.vuelos = vuelos;
 	}
 
-	// Métodos auxiliares
+	
+	// ================================================================================
+	// METODOS
+	public String disponibilidad() {
+		// Obtener estados de disponibilidad
+		// TODO Cambiar de void a String
+		
+		estado = false;
+		boolean aircraft = this.avion.isDisponibilidad();
+		boolean origen = this.lugarPartida.isEstado();
+		boolean destino = this.destino.isEstado();
+		
+		// Modificar estado del vuelo
+		if (origen && destino && aircraft) {
+			estado = true;
+			
+		}
+		
+		// Bonificacion a los pasajeros por afectacion
+		if (estado) {
+			return "¡Enhorabuena! El vuelo está programado y en orden\n" +"¡Alas y buen viento!";
+		}
+		
+		else {
+			
+			for (Pasajero pasajero : pasajeros) {
+				if (pasajero.getClase().equals("A")) {
+					pasajero.setMillas(pasajero.getMillas() + 350);
+					return "El pasajero " + pasajero.getNombre() + " ha recibido 350 millas.";
+				}
+				else if (pasajero.getClase().equals("B")) {
+					pasajero.setMillas(pasajero.getMillas() + 100);
+					return "El pasajero " + pasajero.getNombre() + " ha recibido 100 millas.";
+				}
+			}
+			return "Lo sentimos, pero el vuelo ha sido cancelado\n" + "Todos los pasajeros recibirán millas en compensación";
+		}
+	}
+
+	public float distancia(Aeropuerto origen, Aeropuerto destino) {
+		// Valores basicos <- estan dados en radianes
+		float latDest = (float) (origen.getLat() / (180/Math.PI));;
+		float lonDest = (float) (origen.getLon() / (180/Math.PI));;
+		float latOrig = (float) (destino.getLat() / (180/Math.PI));;
+		float lonOrig = (float) (destino.getLon() / (180/Math.PI));;
+
+		// Se usa la ecuacion de Haversine
+		float distance = (float) (Math.sin(latDest) * Math.sin(latOrig));
+		distance += Math.cos(latDest) * Math.cos(latOrig) * Math.cos(lonDest - lonOrig);
+		distance = (float) Math.acos(distance);
+		distance = 3963 * distance;
+		return distance;
+	}
+	
+	
 	static public Vuelo nuevoVuelo(String codigo, Aeropuerto origen, Aeropuerto destino, String fecha, Avion avion) {
 		Vuelo vuelo = new Vuelo(codigo, origen, destino, fecha, avion);
 		return vuelo;
@@ -206,7 +210,7 @@ public class Vuelo implements Serializable{
 	public String toString() {
 		return "El vuelo " + this.getCodigo() + " de POO Airways sale del aeropuerto " +  this.getLugarPartida().getCodigo() + " de la ciudad de " +
 				this.getLugarPartida().getCiudad() + "\n el día " +  this.getFecha() + " con destino al aeropuerto de " + this.getDestino().getCodigo() + 
-				" de la ciudad de " + this.getDestino().getCiudad() + ".\nDe momento este vuelo tiene " + this.getPasajeros().size() + "y se estima que" +
+				" de la ciudad de " + this.getDestino().getCiudad() + ".\nDe momento este vuelo tiene " + this.getPasajeros().size() + " pasajeros y se estima que" +
 				" su costo de gasolina equivale a unos " + this.getCostoGasolina() + " USD.";
 	}
 	

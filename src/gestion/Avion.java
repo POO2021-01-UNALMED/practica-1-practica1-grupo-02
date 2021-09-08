@@ -16,7 +16,7 @@ public class Avion implements Serializable {
 	private String modelo;
 	private int capacidad;
 	private int numeroTripulacion;
-	private boolean disponibilidad = true;
+	private boolean disponibilidad;
 	private int masa;
 	private static Vector<Avion> aviones = new Vector<Avion>();
 	
@@ -100,7 +100,9 @@ public class Avion implements Serializable {
 		this.masa = masa;
 	}
 
-	// Metodos auxiliares -------------- 
+	
+	// ================================================================================
+	// METODOS AUXILIARES
 	static public Avion buscarAvion(String matricula) {
 		Iterator<Avion> iteradorAvion = aviones.iterator();
 		while(iteradorAvion.hasNext()) {

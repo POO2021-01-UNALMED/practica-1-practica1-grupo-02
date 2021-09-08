@@ -5,7 +5,10 @@ import java.util.*;
 
 import baseDatos.Serializador;
 
-public class Aeropuerto implements Serializable {
+ public class Aeropuerto implements Serializable {
+	 
+	// ================================================================================
+	// ATRIBUTOS
 	private String codigo;
 	private String nombre;
 	private String ciudad;
@@ -17,8 +20,10 @@ public class Aeropuerto implements Serializable {
 	ArrayList<Vuelo> vuelos = new ArrayList<Vuelo>();
 	public static Vector<Aeropuerto> aeropuertos = new Vector<Aeropuerto>();
 	
-	// constructor
 	
+	
+	// ================================================================================
+	// CONSTRUCTOR
 	public Aeropuerto(String codigo, String nombre, String ciudad, String pais, int altura, float lat, float lon) {
 		this.codigo = codigo;
 		this.nombre = nombre;
@@ -31,8 +36,9 @@ public class Aeropuerto implements Serializable {
 		Aeropuerto.aeropuertos.add(this);
 	}
 
-	// Getters and setters  
 	
+	// ================================================================================
+	// GETTERS Y SETTERS
 	public String getCodigo() {
 		return codigo;
 	}
@@ -112,8 +118,10 @@ public class Aeropuerto implements Serializable {
 	public static void setAeropuertos(Vector<Aeropuerto> aeropuertos) {
 		Aeropuerto.aeropuertos = aeropuertos;
 	}
-
-	// Metodos auxiliares
+	
+	
+	// ================================================================================
+	// METODOS AUXILIARES
 	static public Aeropuerto buscarAeropuerto(String codigo) {
 		Iterator<Aeropuerto> iteradorAeropuerto = aeropuertos.iterator();
 		while(iteradorAeropuerto.hasNext()) {

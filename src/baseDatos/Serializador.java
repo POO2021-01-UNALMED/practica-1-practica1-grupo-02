@@ -6,8 +6,7 @@ import java.io.ObjectOutputStream;
 import java.util.Vector;
 
 import gestion.*;
-import paquete1.Empleado;
-import paquete1.Pasajero;
+
 
 public class Serializador {
 
@@ -47,6 +46,7 @@ public class Serializador {
 		}
 		
 	}
+
 	public static void serializarEmpleado(Vector<Empleado> vector) {
 		try{
 			ObjectOutputStream fichero= new ObjectOutputStream(new FileOutputStream("src\\baseDatos\\temp\\empleado.txt"));
@@ -58,6 +58,4 @@ public class Serializador {
 		}
 		
 	}
-
-	
 }
